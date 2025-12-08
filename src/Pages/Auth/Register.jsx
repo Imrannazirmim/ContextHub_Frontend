@@ -1,17 +1,17 @@
 import React from "react";
+import RegisterForm from "../../Components/AuthLayout/RegisterForm";
 
 const Register = () => {
     return (
         <>
-            <section>
-                <div>
-                    <h2>Create Your Account</h2>
-                    <p>Unleash Your Creativity. Join the Hub</p>
+            <section className="container mx-auto flex justify-center items-center flex-col">
+                <div className="mt-20">
+                    <h2 className="text-3xl text-slate-700 font-semibold">Create Your Account</h2>
+                    <p className="text-sm text-center text-slate-700 mt-1">Unleash Your Creativity. Join the Hub</p>
                 </div>
-                <div className="flex flex-col">
-                  <label htmlFor="name">FullName</label>
-                  <input type="text" placeholder="Enter your full name" />
-                </div>
+                <section className="mt-10">
+                    <RegisterForm />
+                </section>
             </section>
         </>
     );

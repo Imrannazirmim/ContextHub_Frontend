@@ -5,6 +5,7 @@ const NavLinks = ({ onClick }) => {
         { href: "/", label: "Home" },
         { href: "/contests", label: "All Contests" },
         { href: "/why", label: "Why ContestHub?" },
+        
     ];
 
     return (

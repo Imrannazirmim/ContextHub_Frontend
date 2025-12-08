@@ -1,96 +1,151 @@
-import { useEffect, useState } from "react";
 import {
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signInWithPopup,
-    updateProfile,
     signOut,
+    updateProfile,
 } from "firebase/auth";
-import {auth} from "../config/firebase.js";
-import {AuthContext} from "./AuthContext.jsx";
+import { useEffect, useState } from "react";
+import { AuthContext } from "./AuthContext";
+import { auth } from "../config/firebase";
 
-const AuthProvider = ({children}) => {
+const googleProvider = new GoogleAuthProvider();
+
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const googleProvider = new GoogleAuthProvider();
-    const createUserAccount = async (email, password, name, photoUrl) => {
+
+    //error handle
+    //  Error (auth/invalid-credential).
+    // Error (auth/too-many-requests).
+
+    const handleAuthError = (err) => {
+        let message = err.message || "Something went wrong.";
+        if (err.code) {
+            switch (err.code) {
+                case "auth/email-already-in-use":
+                    message = "This email is already registered.";
+                    
+                    break;
+                case "auth/invalid-email":
+                    message = "Invalid email address.";
+                    break;
+                case "auth/weak-password":
+                    message = "Password should be at least 6 characters.";
+                    break;
+                case "auth/user-not-found":
+                    message = "User not found.";
+                    break;
+                case "auth/wrong-password":
+                    message = "Incorrect password.";
+                    break;
+                case "auth/too-many-requests":
+                    message = "Too many login attempts. Please try again later.";
+                    break;
+                case "auth/invalid-credential":
+                    message = "Incorrect password.";
+                    break;
+                default:
+                    message = err.message;
+            }
+        }
+        setError(message);
+        throw new Error(message);
+    };
+
+    const registerUser = async (email, password, name, photoURL) => {
         setLoading(true);
         setError(null);
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const newUser = userCredential.user;
-            await updateProfile(newUser, {
-                displayName: name,
-                photoURL: photoUrl
-            })
 
+            if (name || photoURL) {
+                await updateProfile(userCredential.user, {
+                    displayName: name,
+                    photoURL: photoURL || "",
+                });
+            }
 
-            setUser({...newUser, displayName:name, photoURL:photoUrl});
-        } catch (error) {
-            setError(error.message);
+            setUser(auth.currentUser);
+            return userCredential;
+        } catch (err) {
+            handleAuthError(err);
         } finally {
             setLoading(false);
         }
     };
-
-
 
     const signInUser = async (email, password) => {
-        setLoading(true), setError(null);
+        setLoading(true);
+        setError(null);
         try {
-            const result = await signInWithEmailAndPassword(auth, email, password);
-            setUser(result.user);
-            return result.user
-        } catch (error) {
-            setError(error.message);
-            throw error;
+            return await signInWithEmailAndPassword(auth, email, password);
+        } catch (err) {
+            handleAuthError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+    const signInWithGoogle = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            return await signInWithPopup(auth, googleProvider);
+        } catch (err) {
+            handleAuthError(err);
         } finally {
             setLoading(false);
         }
     };
 
-
-    const googleSignUser = async () => {
-        setLoading(true); setError(null);
+    //update profile
+    const updateUserProfile = async (name, photoURL) => {
         try {
-            const result = await signInWithPopup(auth, googleProvider);
-            setUser(result.user);
-            return result.user;
-        } catch (error) {
-            setError(error.message);
-            throw error;
-        } finally {
-            setLoading(false);
+            if (!auth.currentUser) throw new Error("No User logged in.");
+            await updateProfile(auth.currentUser, {
+                displayName: name,
+                photoURL: photoURL,
+            });
+            setUser(auth.currentUser);
+        } catch (err) {
+            handleAuthError(err);
         }
     };
 
-    const logoutUser = async () => {
-        await signOut(auth);
-        setUser(null);
+    const logOut = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            await signOut(auth);
+            setUser(null);
+        } catch (err) {
+            handleAuthError(err);
+        } finally {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
         });
-        return () => unsubscribe();
+        return () => unSubscribe();
     }, []);
-
     const authInfo = {
         user,
         loading,
         error,
-        createUserAccount,
+        setError,
+        registerUser,
         signInUser,
-        logoutUser,
-        googleSignUser,
+        signInWithGoogle,
+        updateUserProfile,
+        logOut,
     };
-
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
-}
-
-export default AuthProvider
+    return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+};
+export default AuthProvider;

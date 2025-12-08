@@ -6,6 +6,7 @@ import AuthLayout from "../Components/Layout/AuthLayout";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import NotFound from "../Pages/Error/NotFound";
+import ForgetPassword from "../Pages/Auth/ForgetPassword";
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
                 children: [
                     { path: "login", Component: Login },
                     { path: "register", Component: Register },
+                    {path: 'forget-password', Component: ForgetPassword}
                 ],
             },
             { path: "*", Component: NotFound },

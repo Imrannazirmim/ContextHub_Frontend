@@ -7,7 +7,9 @@ import Choose from "../../Components/Common/ContestWinner/Choose";
 const Home = () => {
     return (
         <>
-            <HeroSection />
+            <section>
+                <HeroSection />
+            </section>
             <main className="container mx-auto mt-32">
                 <h2 className="text-2xl text-slate-700 font-semibold">Trending Context</h2>
                 <TrendingContext />
