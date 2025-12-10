@@ -3,9 +3,8 @@ import { NavLink } from "react-router";
 const NavLinks = ({ onClick }) => {
     const links = [
         { href: "/", label: "Home" },
-        { href: "/contests", label: "All Contests" },
+        { href: "/contest", label: "All Contests" },
         { href: "/why", label: "Why ContestHub?" },
-        
     ];
 
     return (

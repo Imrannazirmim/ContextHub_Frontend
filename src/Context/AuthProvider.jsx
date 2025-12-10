@@ -18,9 +18,6 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    //error handle
-    //  Error (auth/invalid-credential).
-    // Error (auth/too-many-requests).
 
     const handleAuthError = (err) => {
         let message = err.message || "Something went wrong.";
