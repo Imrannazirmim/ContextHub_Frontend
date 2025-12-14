@@ -14,49 +14,54 @@ import Home from "../Pages/Home/Home";
 import UserProfile from "../Pages/Profile/UserProfile";
 import AllContest from "../Pages/contest/AllContest";
 import ContestDetails from "../Pages/contest/ContestDetails";
+import CheckoutForm from "../Pages/Payment/CheckoutForm.jsx";
 
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        Component: MainLayout,
-        errorElement: <ErrorPage />,
+  {
+    path: "/",
+    Component: MainLayout,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "user-profile",
+        Component: UserProfile,
+      },
+      {
+        path: "contest",
+        Component: AllContest,
+      },
+      {
+        path: "contest/:id",
+        Component: ContestDetails,
+      },
+      {
+        path: "checkout-form",
+        Component: CheckoutForm,
+      },
+      {
+        path: "auth",
+        Component: AuthLayout,
         children: [
-            {
-                index: true,
-                Component: Home,
-            },
-            {
-                path: "user-profile",
-                Component: UserProfile,
-            },
-            {
-                path: 'contest',
-                Component: AllContest
-            },
-            {
-                path: 'contest/:id',
-                Component: ContestDetails
-            },
-            {
-                path: "auth",
-                Component: AuthLayout,
-                children: [
-                    { path: "login", Component: Login },
-                    { path: "register", Component: Register },
-                    { path: "forget-password", Component: ForgetPassword },
-                ],
-            },
+          { path: "login", Component: Login },
+          { path: "register", Component: Register },
+          { path: "forget-password", Component: ForgetPassword },
+        ],
+      },
 
-            { path: "*", Component: NotFound },
-        ],
-    },
-    {
-        path: "dashboard",
-        Component: Dashboard,
-        children: [
-            { path: "create-contest", Component: CreateContext },
-            { path: "submission", Component: Submission },
-            { path: "analytics", Component: Analytics },
-        ],
-    },
+      { path: "*", Component: NotFound },
+    ],
+  },
+  {
+    path: "dashboard",
+    Component: Dashboard,
+    children: [
+      { path: "create-contest", Component: CreateContext },
+      { path: "submission", Component: Submission },
+      { path: "analytics", Component: Analytics },
+    ],
+  },
 ]);
