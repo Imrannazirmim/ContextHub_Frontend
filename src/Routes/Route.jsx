@@ -5,7 +5,7 @@ import AuthLayout from "../Components/Layout/AuthLayout.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import ErrorPage from "../Pages/Error/ErrorPage.jsx";
 import NotFound from "../Pages/Error/NotFound.jsx";
-import MyContest from "../Pages/DashbaordPage/MyContest.jsx";
+import Loading from "../Components/Utils/Loading.jsx";
 
 // Lazy-loaded pages
 const Home = lazy(() => import("../Pages/Home/Home.jsx"));
@@ -21,126 +21,77 @@ const Dashboard = lazy(() => import("../Pages/DashbaordPage/Dashbaord.jsx"));
 const CreateContest = lazy(() => import("../Pages/DashbaordPage/CreateContext.jsx"));
 const Submission = lazy(() => import("../Pages/DashbaordPage/Submission.jsx"));
 const Analytics = lazy(() => import("../Pages/DashbaordPage/Analytics.jsx"));
-
-// export const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     Component: MainLayout,
-//     errorElement: <ErrorPage />,
-//     children: [
-//       { index: true, Component: Home },
-//       {
-//         path: "user-profile",
-//         Component: (
-//           <PrivateRoute>
-//             <UserProfile />
-//           </PrivateRoute>
-//         ),
-//       },
-//       { path: "contest", Component: AllContest },
-//       { path: "contest/:id", Component: ContestDetails },
-//       {
-//         path: "checkout-payment",
-//         Component: (
-//           <PrivateRoute>
-//             <CheckoutPayment />
-//           </PrivateRoute>
-//         ),
-//       },
-//       {
-//         path: "payment-success",
-//         Component: (
-//           <PrivateRoute>
-//             <PaymentSuccess />
-//           </PrivateRoute>
-//         ),
-//       },
-//       {
-//         path: "auth",
-//         Component: AuthLayout,
-//         children: [
-//           { path: "login", Component: Login },
-//           { path: "register", Component: Register },
-//           { path: "forget-password", Component: ForgetPassword },
-//         ],
-//       },
-//       { path: "*", Component: NotFound },
-//     ],
-//   },
-//   {
-//     path: "dashboard",
-//     Component: (
-//       <PrivateRoute>
-//         <Dashboard />
-//       </PrivateRoute>
-//     ),
-//     children: [
-//       { index: true, Component: Dashboard },
-//       { path: "create-contest", Component: CreateContest },
-//       { path: "submission", Component: Submission },
-//       { path: "analytics", Component: Analytics },
-//     ],
-//   },
-// ]);
+const MyContest = lazy(() => import("../Pages/DashbaordPage/MyContest.jsx"));
+const MyParticipated = lazy(() => import("../Pages/DashbaordPage/MyParticipated.jsx"));
+const MyWinning = lazy(() => import("../Pages/DashbaordPage/MyWinning.jsx"));
+const ManageUser = lazy(() => import("../Pages/DashbaordPage/ManageUser.jsx"));
+const ManageContest = lazy(() => import("../Pages/DashbaordPage/ManageContest.jsx"));
+const Leaderboard = lazy(() => import("../Pages/LeaderBoard/Leaderboard.jsx"));
 
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        Component: MainLayout,
-        errorElement: <ErrorPage />,
-        children: [
-            { index: true, Component: Home },
-            {
-                path: "user-profile",
-                Component: () => (
-                    <PrivateRoute>
-                        <UserProfile />
-                    </PrivateRoute>
-                ),
-            },
-            { path: "contest", Component: AllContest },
-            { path: "contest/:id", Component: ContestDetails },
-            {
-                path: "checkout-payment",
-                Component: () => (
-                    <PrivateRoute>
-                        <CheckoutPayment />
-                    </PrivateRoute>
-                ),
-            },
-            {
-                path: "payment-success",
-                Component: () => (
-                    <PrivateRoute>
-                        <PaymentSuccess />
-                    </PrivateRoute>
-                ),
-            },
-            {
-                path: "auth",
-                Component: AuthLayout,
-                children: [
-                    { path: "login", Component: Login },
-                    { path: "register", Component: Register },
-                    { path: "forget-password", Component: ForgetPassword },
-                ],
-            },
-            { path: "*", Component: NotFound },
-        ],
-    },
-    {
-        path: "dashboard",
+  {
+    path: "/",
+    Component: MainLayout,
+    errorElement: <ErrorPage />,
+    hydrateFallbackElement: <Loading />,
+    children: [
+      { index: true, Component: Home },
+      {
+        path: "leaderboard",
         Component: () => (
-            <PrivateRoute>
-                <Dashboard />
-            </PrivateRoute>
+          <PrivateRoute>
+            <Leaderboard />
+          </PrivateRoute>
         ),
+      },
+      { path: "contest", Component: AllContest },
+      { path: "contest/:id", Component: ContestDetails },
+      {
+        path: "checkout-payment",
+        Component: () => (
+          <PrivateRoute>
+            <CheckoutPayment />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment-success",
+        Component: () => (
+          <PrivateRoute>
+            <PaymentSuccess />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "auth",
+        Component: AuthLayout,
         children: [
-            // { index: true, Component: Dashboard },
-            { path: "create-contest", Component: CreateContest },
-            {path: 'my-contest', Component: MyContest},
-            { path: "submission", Component: Submission },
-            { path: "analytics", Component: Analytics },
+          { path: "login", Component: Login },
+          { path: "register", Component: Register },
+          { path: "forget-password", Component: ForgetPassword },
         ],
-    },
+      },
+      { path: "*", Component: NotFound },
+    ],
+  },
+  {
+    path: "dashboard",
+    Component: () => (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      { index: true, Component: Dashboard }, // Optional: dashboard home
+      { path: "create-contest", Component: CreateContest },
+      { path: "my-contest", Component: MyContest },
+      { path: "submission", Component: Submission },
+      { path: "analytics", Component: Analytics },
+      { path: "my-participated", Component: MyParticipated },
+      { path: "user-profile", Component: UserProfile },
+      { path: "my-winning", Component: MyWinning },
+      { path: "manage-users", Component: ManageUser },
+      { path: "manage-contest", Component: ManageContest },
+    ],
+  },
 ]);

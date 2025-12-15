@@ -156,6 +156,7 @@ const CreateContest = () => {
                 <option>Development</option>
                 <option>Art</option>
                 <option>Writing</option>
+                <option>Photography</option>
                 <option>Videos</option>
               </select>
             </div>

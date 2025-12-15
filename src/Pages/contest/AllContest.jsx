@@ -29,12 +29,13 @@ const AllContest = () => {
   const totalPages = data?.totalPages ?? 1;
   const categories = [
     "All",
+    "Design",
+    "Games",
+    "Development",
     "Art",
     "Writing",
-    "Games",
     "Photography",
-    "Development",
-    "Video",
+    "Videos",
   ];
 
 

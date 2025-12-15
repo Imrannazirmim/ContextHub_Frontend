@@ -41,6 +41,14 @@ const AuthButtons = ({ onClose }) => {
                                     <span className="text-sm text-slate-600">{user.email}</span>
                                 </div>
 
+                                 {/* Dashboard */}
+                                <div className="flex items-center gap-2 hover:text-blue-600">
+                                    <LuLayoutDashboard size={20} />
+                                    <Link to="/leaderboard" className="text-[1rem] text-slate-700">
+                                        Leaderboard
+                                    </Link>
+                                </div>
+
                                 {/* Dashboard */}
                                 <div className="flex items-center gap-2 hover:text-blue-600">
                                     <LuLayoutDashboard size={20} />
