@@ -4,6 +4,8 @@ import { TbLayoutSidebarRightExpand } from "react-icons/tb";
 import { IoCreateOutline } from "react-icons/io5";
 import { MdChecklist } from "react-icons/md";
 import { IoAnalyticsOutline } from "react-icons/io5";
+import { VscChecklist } from "react-icons/vsc";
+
 
 import { Link, Outlet } from "react-router";
 import Logo from "../../Components/Common/Header/Navbar/Logo";
@@ -69,6 +71,19 @@ const Dashboard = () => {
                                         </Link>
                                     </li>
 
+                                    {/* my contest */}
+
+                                    <li>
+                                        <Link
+                                            to="/dashboard/my-contest"
+                                            className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                                            data-tip="Homepage"
+                                        >
+                                            {/* Home icon */}
+                                            <VscChecklist className="my-1.5 inline-block size-4" />
+                                            <span className="is-drawer-close:hidden">My Contest</span>
+                                        </Link>
+                                    </li>
                                     <li>
                                         <Link
                                             to="/dashboard/submission"

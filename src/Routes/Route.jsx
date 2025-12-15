@@ -5,6 +5,7 @@ import AuthLayout from "../Components/Layout/AuthLayout.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import ErrorPage from "../Pages/Error/ErrorPage.jsx";
 import NotFound from "../Pages/Error/NotFound.jsx";
+import MyContest from "../Pages/DashbaordPage/MyContest.jsx";
 
 // Lazy-loaded pages
 const Home = lazy(() => import("../Pages/Home/Home.jsx"));
@@ -137,6 +138,7 @@ export const router = createBrowserRouter([
         children: [
             // { index: true, Component: Dashboard },
             { path: "create-contest", Component: CreateContest },
+            {path: 'my-contest', Component: MyContest},
             { path: "submission", Component: Submission },
             { path: "analytics", Component: Analytics },
         ],

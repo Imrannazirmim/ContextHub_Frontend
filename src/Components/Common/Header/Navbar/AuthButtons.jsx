@@ -44,7 +44,7 @@ const AuthButtons = ({ onClose }) => {
                                 {/* Dashboard */}
                                 <div className="flex items-center gap-2 hover:text-blue-600">
                                     <LuLayoutDashboard size={20} />
-                                    <Link to="/dashboard" className="text-[1rem] text-slate-700">
+                                    <Link to="/dashboard/create-contest" className="text-[1rem] text-slate-700">
                                         Dashboard
                                     </Link>
                                 </div>
