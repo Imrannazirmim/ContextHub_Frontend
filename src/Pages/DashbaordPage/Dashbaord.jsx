@@ -7,6 +7,8 @@ import { IoAnalyticsOutline } from "react-icons/io5";
 
 import { Link, Outlet } from "react-router";
 import Logo from "../../Components/Common/Header/Navbar/Logo";
+import { Suspense } from "react";
+import Loading from "../../Components/Utils/Loading";
 
 const Dashboard = () => {
     return (
@@ -25,9 +27,11 @@ const Dashboard = () => {
                         </div>
                     </nav>
                     {/* Page content here */}
-                    <div className="p-4">
-                        <Outlet />
-                    </div>
+                    <Suspense fallback={<Loading />}>
+                        <div className="p-4">
+                            <Outlet />
+                        </div>
+                    </Suspense>
                 </div>
 
                 <div className="drawer-side is-drawer-close:overflow-visible">
@@ -46,7 +50,9 @@ const Dashboard = () => {
                                     >
                                         {/* Home icon */}
                                         <GoHome className="my-1.5 inline-block size-6" />
-                                        <span className="is-drawer-close:hidden text-[1.1rem] text-pink-500 font-semibold">Go to Home</span>
+                                        <span className="is-drawer-close:hidden text-[1.1rem] text-pink-500 font-semibold">
+                                            Go to Home
+                                        </span>
                                     </Link>
                                 </li>
 

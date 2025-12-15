@@ -152,9 +152,11 @@ const CreateContest = () => {
                 {...register("contestType")}
               >
                 <option>Design</option>
+                <option>Games</option>
                 <option>Development</option>
                 <option>Art</option>
                 <option>Writing</option>
+                <option>Videos</option>
               </select>
             </div>
 

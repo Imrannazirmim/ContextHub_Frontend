@@ -88,6 +88,8 @@ const ContestDetails = () => {
                         entryFee={contestData.entryFee}
                         createdAt={contestData.createdAt}
                         deadline={contestData.deadline}
+                        contestId={contestData._id}
+                        participantsCount={contestData.participantsCount}
                     />
                 </section>
             </main>

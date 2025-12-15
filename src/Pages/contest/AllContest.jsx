@@ -29,12 +29,14 @@ const AllContest = () => {
   const totalPages = data?.totalPages ?? 1;
   const categories = [
     "All",
-    "Design",
+    "Art",
     "Writing",
+    "Games",
     "Photography",
     "Development",
     "Video",
   ];
+
 
   const formatDate = (dateString) =>
     new Date(dateString).toLocaleDateString("en-US", {
@@ -59,6 +61,8 @@ const AllContest = () => {
       </div>
     );
 
+
+    console.log(contests)
   return (
     <section className="w-full max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-8">Explore All Contests</h1>
@@ -118,7 +122,7 @@ const AllContest = () => {
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center gap-2 text-sm text-gray-700">
                     <FiUsers className="text-primary" />
-                    <span>{contest.participants || 0} Participants</span>
+                    <span>{contest.participantsCount || 0} Participants</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-gray-700">
                     <FiDollarSign className="text-primary" />
