@@ -119,6 +119,24 @@ const CreateContest = () => {
             )}
           </div>
 
+          {/* Task Instruction */}
+
+          <div className="form-control flex flex-col gap-1">
+            <label className="label font-medium">Task Instruction</label>
+            <textarea
+              className="textarea w-full textarea-bordered h-28 resize-none"
+              placeholder="Task Instruction"
+              {...register("instruction", {
+                required: "Task Instruction is required",
+              })}
+            ></textarea>
+            {errors.instruction && (
+              <p className="text-error text-xs mt-1">
+                {errors.instruction.message}
+              </p>
+            )}
+          </div>
+
           {/* Entry Fee + Prize */}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="form-control">

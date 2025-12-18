@@ -7,6 +7,7 @@ import ErrorPage from "../Pages/Error/ErrorPage.jsx";
 import NotFound from "../Pages/Error/NotFound.jsx";
 import Loading from "../Components/Utils/Loading.jsx";
 import Analytics from "../Pages/DashbaordPage/Analytics.jsx";
+import Why from "../Pages/Discover/Why.jsx";
 
 // Lazy loaded pages
 const Home = lazy(() => import("../Pages/Home/Home.jsx"));
@@ -40,6 +41,8 @@ export const router = createBrowserRouter([
             { index: true, Component: Home },
             { path: "contest", Component: AllContest },
             { path: "contest/:id", Component: ContestDetails },
+            { path: "why", Component: Why },
+
             {
                 path: "leaderboard",
                 Component: () => (
@@ -94,9 +97,7 @@ export const router = createBrowserRouter([
 
             // FIXED: This route now requires :contestId
             { path: "my-submission/:contestId", Component: MySubmission },
-            {path:'analytics', Component: Analytics}
-            
-
+            { path: "analytics", Component: Analytics },
         ],
     },
 ]);

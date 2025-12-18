@@ -6,3 +6,6 @@
 html {
   scroll-behavior: smooth;
 }
+.active{
+  @apply text-pink-500
+}
