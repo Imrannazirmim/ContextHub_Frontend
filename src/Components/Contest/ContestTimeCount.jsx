@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { GiTargetPrize } from "react-icons/gi";
-import { FaMoneyBills } from "react-icons/fa6";
+import { useEffect, useState, useMemo } from "react";
 import { MdPeople } from "react-icons/md";
+import { FaMoneyBills } from "react-icons/fa6";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import Modal from "../Modal/Modal";
+import { useNavigate } from "react-router";
 
-const ContestTimeCount = ({ prize, deadline, createdAt, entryFee, contestId, participantsCount }) => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+const ContestTimeCount = ({
+    contest,
+    refetch,
+    isRegistered,
+    deadlinePassed,
+    contestId,
+    onSubmitTask,
+    hasSubmitted = false,
+}) => {
     const [timeRemaining, setTimeRemaining] = useState({
         days: 0,
         hours: 0,
@@ -14,19 +20,15 @@ const ContestTimeCount = ({ prize, deadline, createdAt, entryFee, contestId, par
         secs: 0,
     });
 
-    //time countdown
-    const calculationTimeRemaining = () => {
+    const navigate = useNavigate();
+
+    const calculateTimeRemaining = () => {
         const now = new Date();
-        const end = new Date(deadline);
+        const end = new Date(contest.deadline);
         const diff = end - now;
+
         if (diff <= 0) {
-            return {
-                days: 0,
-                hours: 0,
-                mins: 0,
-                secs: 0,
-                expired: true,
-            };
+            return { days: 0, hours: 0, mins: 0, secs: 0, expired: true };
         }
 
         return {
@@ -39,16 +41,18 @@ const ContestTimeCount = ({ prize, deadline, createdAt, entryFee, contestId, par
     };
 
     useEffect(() => {
-        if (!deadline) return;
-        const updateTime = () => {
-            setTimeRemaining(calculationTimeRemaining(deadline));
-        };
-        updateTime();
-        const timer = setInterval(updateTime, 1000);
-        return () => clearInterval(timer);
-    }, [deadline]);
+        const timer = setInterval(() => {
+            const remaining = calculateTimeRemaining();
+            setTimeRemaining(remaining);
 
-    //format date
+            if (remaining.expired) {
+                clearInterval(timer);
+            }
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [contest.deadline]);
+
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString("en-US", {
             year: "numeric",
@@ -57,63 +61,113 @@ const ContestTimeCount = ({ prize, deadline, createdAt, entryFee, contestId, par
         });
     };
 
+    const timeItems = useMemo(
+        () => [
+            { value: timeRemaining.days, label: "Days" },
+            { value: timeRemaining.hours, label: "Hours" },
+            { value: timeRemaining.mins, label: "Mins" },
+            { value: timeRemaining.secs, label: "Secs" },
+        ],
+        [timeRemaining]
+    );
+
     return (
-        <div className="flex flex-col space-y-8">
-            <div className="flex flex-col gap-2 ">
-                <span className="text-2xl font-semibold text-blue-500 px-12 py-6">Contest Ends In</span>
-                <div className="w-[80%] mx-auto flex items-center gap-3 bg-blue-100 rounded-2xl p-4">
-                    {[
-                        { value: timeRemaining.days, label: "Days" },
-                        { value: timeRemaining.hours, label: "Hours" },
-                        { value: timeRemaining.mins, label: "Mins" },
-                        { value: timeRemaining.secs, label: "Secs" },
-                    ].map((item) => (
-                        <div key={item.label} className="text-center">
-                            <div className="text-2xl sm:text-3xl font-bold text-primary">
-                                {String(item.value).padStart(2, "0")}
+        <div className="flex flex-col space-y-6">
+            {/* Countdown */}
+            {!deadlinePassed ? (
+                <div className="flex flex-col gap-3">
+                    <h3 className="text-2xl font-semibold text-blue-600 text-center">Contest Ends In</h3>
+                    <div className="grid grid-cols-4 gap-4 bg-blue-50 rounded-2xl p-6">
+                        {timeItems.map((item) => (
+                            <div key={item.label} className="text-center">
+                                <div className="text-3xl font-bold text-blue-700">
+                                    {String(item.value).padStart(2, "0")}
+                                </div>
+                                <div className="text-xs text-gray-600 mt-1">{item.label}</div>
                             </div>
-                            <div className="text-[10px] sm:text-xs text-gray-500 mt-1">{item.label}</div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
-            <hr className="text-gray-300" />
-            <div className="w-[80%] mx-auto flex items-center gap-3 bg-blue-100 rounded-2xl p-4">
-                <FaMoneyBills className="text-blue-500" size={30} />
-                <div className="flex flex-col ">
-                    <span className="text-slate-700">Prize money</span>
-                    <strong>${prize}</strong>
+            ) : (
+                <div className="text-center py-8">
+                    <h3 className="text-2xl font-bold text-red-600">Contest Ended</h3>
                 </div>
-            </div>
-            <div className="w-[80%] mx-auto flex items-center gap-3 bg-blue-100 rounded-2xl p-4">
-                <MdPeople className="text-blue-500" size={30} />
-                <div className="flex flex-col ">
-                    <span className="text-slate-700">Participants</span>
-                    <strong>{participantsCount}</strong>
+            )}
+
+            <hr className="border-gray-300" />
+
+            {/* Prize, Participants, Entry Fee */}
+            <div className="space-y-4">
+                <div className="flex items-center gap-4 bg-blue-50 rounded-xl p-4">
+                    <FaMoneyBills className="text-blue-600" size={28} />
+                    <div>
+                        <p className="text-gray-600">Prize Money</p>
+                        <strong className="text-xl">${contest.prizeMoney || contest.prize}</strong>
+                    </div>
                 </div>
-            </div>
-            <div className="w-[80%] mx-auto flex items-center gap-3 bg-blue-100 rounded-2xl p-4">
-                <RiMoneyDollarCircleLine className="text-blue-500" size={30} />
-                <div className="flex flex-col ">
-                    <span className="text-slate-700">Entry Fee</span>
-                    <strong>${entryFee}</strong>
+
+                <div className="flex items-center gap-4 bg-blue-50 rounded-xl p-4">
+                    <MdPeople className="text-blue-600" size={28} />
+                    <div>
+                        <p className="text-gray-600">Participants</p>
+                        <strong className="text-xl">{contest.participantsCount}</strong>
+                    </div>
                 </div>
-            </div>
-            <hr className="text-gray-300" />
-            <div className="w-[80%] mx-auto">
-                <button onClick={()=>setIsOpenModal(true)} className="btn btn-active btn-primary w-full">Payment</button>
+
+                <div className="flex items-center gap-4 bg-blue-50 rounded-xl p-4">
+                    <RiMoneyDollarCircleLine className="text-blue-600" size={28} />
+                    <div>
+                        <p className="text-gray-600">Entry Fee</p>
+                        <strong className="text-xl">${contest.entryFee || contest.price}</strong>
+                    </div>
+                </div>
             </div>
 
-            <div className="w-[80%] mx-auto flex flex-col gap-2 bg-blue-100 rounded-2xl p-4">
-                <strong>Ends Date</strong>
-                <span>{formatDate(deadline)}</span>
+            <hr className="border-gray-300" />
+
+            {/* Action Buttons */}
+            <div className="space-y-3">
+                {!deadlinePassed && !isRegistered && (
+                    <button
+                        onClick={() => navigate(`/checkout-payment/${contestId}`)}
+                        className="w-full btn btn-primary text-lg py-3"
+                    >
+                        Register & Pay
+                    </button>
+                )}
+
+                {isRegistered && !deadlinePassed && !hasSubmitted && (
+                    <button onClick={onSubmitTask} className="w-full btn btn-success text-lg py-3">
+                        Submit Task
+                    </button>
+                )}
+
+                {isRegistered && !deadlinePassed && hasSubmitted && (
+                    <button disabled className="w-full btn btn-success opacity-80 text-lg py-3 cursor-not-allowed">
+                        Task Submitted ✓
+                    </button>
+                )}
+
+                {deadlinePassed && (
+                    <button disabled className="w-full btn btn-disabled text-lg py-3">
+                        Contest Ended
+                    </button>
+                )}
             </div>
-            <div className="w-[80%] mx-auto flex flex-col gap-2 bg-blue-100 rounded-2xl p-4">
-                <strong>Start Date</strong>
-                <span>{formatDate(createdAt)}</span>
+
+            {/* Dates */}
+            <div className="space-y-3">
+                <div className="bg-blue-50 rounded-xl p-4">
+                    <strong>Start Date</strong>
+                    <p>{formatDate(contest.createdAt)}</p>
+                </div>
+                <div className="bg-blue-50 rounded-xl p-4">
+                    <strong>End Date</strong>
+                    <p>{formatDate(contest.deadline)}</p>
+                </div>
             </div>
-            {isOpenModal && <Modal contestId={contestId} entryFee={entryFee} onClose={()=>setIsOpenModal(false)}/>}
         </div>
     );
 };
+
 export default ContestTimeCount;

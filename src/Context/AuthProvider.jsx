@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import { auth } from "../config/firebase";
+import axios from "axios";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -18,14 +19,13 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-
     const handleAuthError = (err) => {
         let message = err.message || "Something went wrong.";
         if (err.code) {
             switch (err.code) {
                 case "auth/email-already-in-use":
                     message = "This email is already registered.";
-                    
+
                     break;
                 case "auth/invalid-email":
                     message = "Invalid email address.";
@@ -126,9 +126,17 @@ const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);
             setLoading(false);
+            if (currentUser) {
+                const userInfo = {
+                    name: currentUser.displayName,
+                    email: currentUser.email,
+                    photoURL: currentUser.photoURL,
+                };
+                await axios.post("http://localhost:3000/users", userInfo);
+            }
         });
         return () => unSubscribe();
     }, []);

@@ -13,6 +13,7 @@ const Dashboard = () => {
     const userLinks = [
         { to: "/dashboard/my-participated", icon: FiList, label: "My Participated" },
         { to: "/dashboard/my-winning", icon: AiFillTrophy, label: "My Winnings" },
+        { to: "/dashboard/payment-history", icon: AiFillTrophy, label: "Payment History" },
         { to: "/dashboard/user-profile", icon: FiUser, label: "My Profile" },
     ];
 
@@ -26,8 +27,8 @@ const Dashboard = () => {
         { to: "/dashboard/manage-contests", icon: FiCheckSquare, label: "Manage Contests" },
     ];
 
-    const isCreator = userData?.role === "creator" || userData?.role === "admin";
-    const isAdmin = userData?.role === "admin";
+    // const isCreator = userData?.role === "creator" || userData?.role === "admin";
+    // const isAdmin = userData?.role === "admin";
 
     return (
         <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -100,56 +101,56 @@ const Dashboard = () => {
                         </div>
 
                         {/* Creator Links */}
-                        {isCreator && (
-                            <div>
-                                <p className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                                    Creator
-                                </p>
-                                {creatorLinks.map((link) => (
-                                    <NavLink
-                                        key={link.to}
-                                        to={link.to}
-                                        onClick={() => setSidebarOpen(false)}
-                                        className={({ isActive }) =>
-                                            `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-                                                isActive
-                                                    ? "bg-primary-600 text-white"
-                                                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                            }`
-                                        }
-                                    >
-                                        <link.icon className="text-xl" />
-                                        <span className="font-medium">{link.label}</span>
-                                    </NavLink>
-                                ))}
-                            </div>
-                        )}
+                        {/* {isCreator && ( */}
+                        <div>
+                            <p className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                                Creator
+                            </p>
+                            {creatorLinks.map((link) => (
+                                <NavLink
+                                    key={link.to}
+                                    to={link.to}
+                                    onClick={() => setSidebarOpen(false)}
+                                    className={({ isActive }) =>
+                                        `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                                            isActive
+                                                ? "bg-primary-600 text-white"
+                                                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                        }`
+                                    }
+                                >
+                                    <link.icon className="text-xl" />
+                                    <span className="font-medium">{link.label}</span>
+                                </NavLink>
+                            ))}
+                        </div>
+                        {/* )} */}
 
                         {/* Admin Links */}
-                        {isAdmin && (
-                            <div>
-                                <p className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                                    Admin
-                                </p>
-                                {adminLinks.map((link) => (
-                                    <NavLink
-                                        key={link.to}
-                                        to={link.to}
-                                        onClick={() => setSidebarOpen(false)}
-                                        className={({ isActive }) =>
-                                            `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-                                                isActive
-                                                    ? "bg-primary-600 text-white"
-                                                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                            }`
-                                        }
-                                    >
-                                        <link.icon className="text-xl" />
-                                        <span className="font-medium">{link.label}</span>
-                                    </NavLink>
-                                ))}
-                            </div>
-                        )}
+                        {/* {isAdmin && ( */}
+                        <div>
+                            <p className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                                Admin
+                            </p>
+                            {adminLinks.map((link) => (
+                                <NavLink
+                                    key={link.to}
+                                    to={link.to}
+                                    onClick={() => setSidebarOpen(false)}
+                                    className={({ isActive }) =>
+                                        `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                                            isActive
+                                                ? "bg-primary-600 text-white"
+                                                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                        }`
+                                    }
+                                >
+                                    <link.icon className="text-xl" />
+                                    <span className="font-medium">{link.label}</span>
+                                </NavLink>
+                            ))}
+                        </div>
+                        {/* )} */}
                     </nav>
                 </div>
             </aside>
@@ -161,11 +162,11 @@ const Dashboard = () => {
                     </button>
                 </header>
 
-                <Suspense fallback={<Loading />}>
-                    <main className="flex-1 p-6 overflow-y-auto">
+                <main className="flex-1 p-6 overflow-y-auto">
+                    <Suspense fallback={<Loading />}>
                         <Outlet />
-                    </main>
-                </Suspense>
+                    </Suspense>
+                </main>
             </div>
         </div>
     );

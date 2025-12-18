@@ -7,6 +7,9 @@ import { FiEdit3, FiMail, FiAward, FiTrendingUp, FiDollarSign } from "react-icon
 import { FaTrophy, FaChartPie } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+
+
+
 const UserProfile = () => {
     const { user, updateUserProfile } = useAuth();
     const axiosSecure = useAxiosSecure();
@@ -18,6 +21,9 @@ const UserProfile = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
+
+
+    
 
     /* ----------  DATA  ---------- */
     const { data: stats } = useQuery({
@@ -55,6 +61,7 @@ const UserProfile = () => {
                 text: err.response?.data?.message || "Something went wrong",
             }),
     });
+  
 
     const onSubmit = (data) => updateMutation.mutate(data);
 

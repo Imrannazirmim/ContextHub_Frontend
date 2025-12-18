@@ -24,9 +24,11 @@ const MyContest = () => {
         queryKey: ["my-contest", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/contest/my/created?email=${user.email}`);
-            return res.data;
+            return res.data.contests;
         },
     });
+
+    console.log(contestData)
 
     const handleDelete = async (id) => {
         const confirm = await Swal.fire({
