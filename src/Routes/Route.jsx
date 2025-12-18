@@ -59,9 +59,11 @@ export const router = createBrowserRouter([
             {
                 path: "contest/:id",
                 element: (
-                    <Suspense fallback={<Loading />}>
-                        <ContestDetails />
-                    </Suspense>
+                    <PrivateRoute>
+                        <Suspense fallback={<Loading />}>
+                            <ContestDetails />
+                        </Suspense>
+                    </PrivateRoute>
                 ),
             },
             {
