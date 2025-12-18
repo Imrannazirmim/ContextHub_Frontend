@@ -6,11 +6,9 @@ import PrivateRoute from "./PrivateRoute.jsx";
 import ErrorPage from "../Pages/Error/ErrorPage.jsx";
 import NotFound from "../Pages/Error/NotFound.jsx";
 import Loading from "../Components/Utils/Loading.jsx";
-import PaymentHistory from "../Pages/Payment/PaymentHistory.jsx";
 
-// Lazy-loaded pages
+// Lazy loaded pages
 const Home = lazy(() => import("../Pages/Home/Home.jsx"));
-const UserProfile = lazy(() => import("../Pages/Profile/UserProfile.jsx"));
 const AllContest = lazy(() => import("../Pages/contest/AllContest.jsx"));
 const ContestDetails = lazy(() => import("../Pages/contest/ContestDetails.jsx"));
 const CheckoutPayment = lazy(() => import("../Pages/Payment/CheckoutPayment.jsx"));
@@ -20,14 +18,16 @@ const Register = lazy(() => import("../Pages/Auth/Register.jsx"));
 const ForgetPassword = lazy(() => import("../Pages/Auth/ForgetPassword.jsx"));
 const Dashboard = lazy(() => import("../Pages/DashbaordPage/Dashbaord.jsx"));
 const CreateContest = lazy(() => import("../Pages/DashbaordPage/CreateContext.jsx"));
-const Submission = lazy(() => import("../Pages/DashbaordPage/Submission.jsx"));
-const Analytics = lazy(() => import("../Pages/DashbaordPage/Analytics.jsx"));
 const MyContest = lazy(() => import("../Pages/DashbaordPage/MyContest.jsx"));
 const MyParticipated = lazy(() => import("../Pages/DashbaordPage/MyParticipated.jsx"));
 const MyWinning = lazy(() => import("../Pages/DashbaordPage/MyWinning.jsx"));
+const PaymentHistory = lazy(() => import("../Pages/Payment/PaymentHistory.jsx"));
 const ManageUser = lazy(() => import("../Pages/DashbaordPage/ManageUser.jsx"));
 const ManageContest = lazy(() => import("../Pages/DashbaordPage/ManageContest.jsx"));
 const Leaderboard = lazy(() => import("../Pages/LeaderBoard/Leaderboard.jsx"));
+
+// CRITICAL: Import MySubmission
+const MySubmission = lazy(() => import("../Pages/DashbaordPage/MySubmission.jsx"));
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +37,8 @@ export const router = createBrowserRouter([
         hydrateFallbackElement: <Loading />,
         children: [
             { index: true, Component: Home },
+            { path: "contest", Component: AllContest },
+            { path: "contest/:id", Component: ContestDetails },
             {
                 path: "leaderboard",
                 Component: () => (
@@ -45,8 +47,6 @@ export const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
             },
-            { path: "contest", Component: AllContest },
-            { path: "contest/:id", Component: ContestDetails },
             {
                 path: "checkout-payment/:contestId",
                 Component: () => (
@@ -83,17 +83,16 @@ export const router = createBrowserRouter([
             </PrivateRoute>
         ),
         children: [
-            // { index: true, Component: Dashboard },
             { path: "create-contest", Component: CreateContest },
             { path: "my-contest", Component: MyContest },
-            { path: "submission", Component: Submission },
-             {path: 'payment-history', Component: PaymentHistory},
-            { path: "analytics", Component: Analytics },
             { path: "my-participated", Component: MyParticipated },
-            { path: "user-profile", Component: UserProfile },
             { path: "my-winning", Component: MyWinning },
+            { path: "payment-history", Component: PaymentHistory },
             { path: "manage-users", Component: ManageUser },
             { path: "manage-contest", Component: ManageContest },
+
+            // FIXED: This route now requires :contestId
+            { path: "my-submission/:contestId", Component: MySubmission },
         ],
     },
 ]);

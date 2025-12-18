@@ -9,7 +9,7 @@ const PaymentSuccess = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth(); // get current user
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
         const confirmPayment = async () => {
@@ -46,7 +46,9 @@ const PaymentSuccess = () => {
         <div className="flex flex-col items-center justify-center h-screen">
             <h1 className="text-3xl font-bold text-green-600">Payment Successful 🎉</h1>
             <p className="mt-2">You are now registered.</p>
-            <button onClick={()=>navigate('/contest')} className="btn btn-accent">Go to home</button>
+            <button onClick={() => navigate(`/contest`)} className="btn btn-accent">
+                Go to home
+            </button>
         </div>
     );
 };

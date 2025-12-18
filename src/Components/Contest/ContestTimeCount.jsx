@@ -6,7 +6,6 @@ import { useNavigate } from "react-router";
 
 const ContestTimeCount = ({
     contest,
-    refetch,
     isRegistered,
     deadlinePassed,
     contestId,
