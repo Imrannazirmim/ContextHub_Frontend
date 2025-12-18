@@ -28,6 +28,8 @@ const Dashboard = () => {
     const adminLinks = [
         { to: "/dashboard/manage-users", icon: FiUsers, label: "Manage Users" },
         { to: "/dashboard/manage-contest", icon: FiCheckSquare, label: "Manage Contests" },
+        { to: "/dashboard/analytics", icon: FiCheckSquare, label: "Analytics" },
+
     ];
 
     return (
@@ -80,7 +82,7 @@ const Dashboard = () => {
                                     className={({ isActive }) =>
                                         `flex items-center gap-3 px-3 py-2 rounded-lg ${
                                             isActive
-                                                ? "bg-primary-600 text-white"
+                                                ? "bg-primary-600 text-pink-500"
                                                 : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                                         }`
                                     }
@@ -102,7 +104,7 @@ const Dashboard = () => {
                                     className={({ isActive }) =>
                                         `flex items-center gap-3 px-3 py-2 rounded-lg ${
                                             isActive
-                                                ? "bg-primary-600 text-white"
+                                                ? "bg-primary-600  text-pink-500"
                                                 : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                                         }`
                                     }
@@ -125,7 +127,7 @@ const Dashboard = () => {
                                     className={({ isActive }) =>
                                         `flex items-center gap-3 px-3 py-2 rounded-lg ${
                                             isActive
-                                                ? "bg-primary-600 text-white"
+                                                ? "bg-primary-600  text-pink-500"
                                                 : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                                         }`
                                     }

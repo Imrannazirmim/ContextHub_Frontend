@@ -52,7 +52,7 @@ const MyContest = () => {
                 refetch();
             }
         } catch (error) {
-            Swal.fire("Error!", "Failed to delete contest.", "error");
+            Swal.fire("Error!", "Failed to delete contest.", error.message);
         }
     };
 
@@ -89,7 +89,7 @@ const MyContest = () => {
                 refetch();
             }
         } catch (error) {
-            Swal.fire("Error!", "Failed to update contest.", "error");
+            Swal.fire("Error!", "Failed to update contest.", error.message);
         }
     };
 

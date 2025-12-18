@@ -6,6 +6,7 @@ import PrivateRoute from "./PrivateRoute.jsx";
 import ErrorPage from "../Pages/Error/ErrorPage.jsx";
 import NotFound from "../Pages/Error/NotFound.jsx";
 import Loading from "../Components/Utils/Loading.jsx";
+import Analytics from "../Pages/DashbaordPage/Analytics.jsx";
 
 // Lazy loaded pages
 const Home = lazy(() => import("../Pages/Home/Home.jsx"));
@@ -93,6 +94,9 @@ export const router = createBrowserRouter([
 
             // FIXED: This route now requires :contestId
             { path: "my-submission/:contestId", Component: MySubmission },
+            {path:'analytics', Component: Analytics}
+            
+
         ],
     },
 ]);
