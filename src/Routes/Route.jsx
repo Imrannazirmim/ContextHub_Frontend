@@ -1,13 +1,12 @@
-import { createBrowserRouter } from "react-router";
-import React, { lazy } from "react";
+import { createBrowserRouter, Navigate } from "react-router";
+import React, { lazy, Suspense } from "react";
 import MainLayout from "../Components/Layout/MainLayout.jsx";
 import AuthLayout from "../Components/Layout/AuthLayout.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import ErrorPage from "../Pages/Error/ErrorPage.jsx";
 import NotFound from "../Pages/Error/NotFound.jsx";
 import Loading from "../Components/Utils/Loading.jsx";
-import Analytics from "../Pages/DashbaordPage/Analytics.jsx";
-import Why from "../Pages/Discover/Why.jsx";
+import AdminRoute from "./AdminRoute.jsx";
 
 // Lazy loaded pages
 const Home = lazy(() => import("../Pages/Home/Home.jsx"));
@@ -18,7 +17,10 @@ const PaymentSuccess = lazy(() => import("../Pages/Payment/PaymentSuccess.jsx"))
 const Login = lazy(() => import("../Pages/Auth/Login.jsx"));
 const Register = lazy(() => import("../Pages/Auth/Register.jsx"));
 const ForgetPassword = lazy(() => import("../Pages/Auth/ForgetPassword.jsx"));
+
 const Dashboard = lazy(() => import("../Pages/DashbaordPage/Dashbaord.jsx"));
+
+// Dashboard Pages
 const CreateContest = lazy(() => import("../Pages/DashbaordPage/CreateContext.jsx"));
 const MyContest = lazy(() => import("../Pages/DashbaordPage/MyContest.jsx"));
 const MyParticipated = lazy(() => import("../Pages/DashbaordPage/MyParticipated.jsx"));
@@ -26,78 +28,183 @@ const MyWinning = lazy(() => import("../Pages/DashbaordPage/MyWinning.jsx"));
 const PaymentHistory = lazy(() => import("../Pages/Payment/PaymentHistory.jsx"));
 const ManageUser = lazy(() => import("../Pages/DashbaordPage/ManageUser.jsx"));
 const ManageContest = lazy(() => import("../Pages/DashbaordPage/ManageContest.jsx"));
-const Leaderboard = lazy(() => import("../Pages/LeaderBoard/Leaderboard.jsx"));
-
-// CRITICAL: Import MySubmission
 const MySubmission = lazy(() => import("../Pages/DashbaordPage/MySubmission.jsx"));
+const Analytics = lazy(() => import("../Pages/DashbaordPage/Analytics.jsx"));
+
+const Leaderboard = lazy(() => import("../Pages/LeaderBoard/Leaderboard.jsx"));
+const Why = lazy(() => import("../Pages/Discover/Why.jsx"));
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        Component: MainLayout,
+        element: <MainLayout />,
         errorElement: <ErrorPage />,
-        hydrateFallbackElement: <Loading />,
         children: [
-            { index: true, Component: Home },
-            { path: "contest", Component: AllContest },
-            { path: "contest/:id", Component: ContestDetails },
-            { path: "why", Component: Why },
-
+            {
+                index: true,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Home />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "contest",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <AllContest />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "contest/:id",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <ContestDetails />
+                    </Suspense>
+                ),
+            },
+            {
+                path: "why",
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Why />
+                    </Suspense>
+                ),
+            },
             {
                 path: "leaderboard",
-                Component: () => (
+                element: (
                     <PrivateRoute>
-                        <Leaderboard />
+                        <Suspense fallback={<Loading />}>
+                            <Leaderboard />
+                        </Suspense>
                     </PrivateRoute>
                 ),
             },
             {
                 path: "checkout-payment/:contestId",
-                Component: () => (
+                element: (
                     <PrivateRoute>
-                        <CheckoutPayment />
+                        <Suspense fallback={<Loading />}>
+                            <CheckoutPayment />
+                        </Suspense>
                     </PrivateRoute>
                 ),
             },
             {
                 path: "payment-success",
-                Component: () => (
+                element: (
                     <PrivateRoute>
-                        <PaymentSuccess />
+                        <Suspense fallback={<Loading />}>
+                            <PaymentSuccess />
+                        </Suspense>
                     </PrivateRoute>
                 ),
             },
             {
                 path: "auth",
-                Component: AuthLayout,
+                element: <AuthLayout />,
                 children: [
-                    { path: "login", Component: Login },
-                    { path: "register", Component: Register },
-                    { path: "forget-password", Component: ForgetPassword },
+                    {
+                        path: "login",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <Login />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "register",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <Register />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: "forget-password",
+                        element: (
+                            <Suspense fallback={<Loading />}>
+                                <ForgetPassword />
+                            </Suspense>
+                        ),
+                    },
                 ],
             },
-            { path: "*", Component: NotFound },
+            {
+                path: "*",
+                element: <NotFound />,
+            },
         ],
     },
+
     {
         path: "dashboard",
-        Component: () => (
+        element: (
             <PrivateRoute>
-                <Dashboard />
+                <Suspense fallback={<Loading />}>
+                    <Dashboard />
+                </Suspense>
             </PrivateRoute>
         ),
         children: [
-            { path: "create-contest", Component: CreateContest },
-            { path: "my-contest", Component: MyContest },
-            { path: "my-participated", Component: MyParticipated },
-            { path: "my-winning", Component: MyWinning },
-            { path: "payment-history", Component: PaymentHistory },
-            { path: "manage-users", Component: ManageUser },
-            { path: "manage-contest", Component: ManageContest },
+            {
+                index: true,
+                element: <Navigate to="/dashboard/my-participated" replace />,
+            },
 
-            // FIXED: This route now requires :contestId
-            { path: "my-submission/:contestId", Component: MySubmission },
-            { path: "analytics", Component: Analytics },
+            {
+                path: "my-participated",
+                element: <MyParticipated />,
+            },
+            {
+                path: "my-winning",
+                element: <MyWinning />,
+            },
+            {
+                path: "payment-history",
+                element: <PaymentHistory />,
+            },
+
+            {
+                path: "create-contest",
+                element: <CreateContest />,
+            },
+            {
+                path: "my-contest",
+                element: <MyContest />,
+            },
+
+            {
+                path: "my-submission/:contestId",
+                element: <MySubmission />,
+            },
+
+            {
+                path: "manage-users",
+                element: (
+                    <AdminRoute>
+                        <ManageUser />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "manage-contest",
+                element: (
+                    <AdminRoute>
+                        <ManageContest />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "analytics",
+                element: (
+                    <AdminRoute>
+                        <Analytics />
+                    </AdminRoute>
+                ),
+            },
         ],
     },
 ]);
