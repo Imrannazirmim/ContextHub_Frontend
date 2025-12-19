@@ -8,7 +8,7 @@ import useAuth from "../../../../Hooks/useAuth";
 
 const AuthButtons = ({ onClose }) => {
     const navigate = useNavigate();
-    const { user, logout } = useAuth();
+    const { user, logOut } = useAuth();
     const [showMenu, setShowMenu] = useState(false);
 
     const handleNavigate = (path) => {
@@ -16,10 +16,16 @@ const AuthButtons = ({ onClose }) => {
         if (onClose) onClose();
     };
 
-    const handleLogout = async()=>{
-        await logout()
-
-    }
+    const handleLogout = async () => {
+        try {
+            await logOut();
+            setShowMenu(false);
+            navigate("/auth/login");
+            if (onClose) onClose();
+        } catch (error) {
+            throw new Error(error);
+        }
+    };
 
     return (
         <div className="relative inline-block">
