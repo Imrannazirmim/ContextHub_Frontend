@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
 import axios from "axios";
 import { validationRules } from "../Utils/validationRules.jsx";
+import { getAdditionalUserInfo } from "firebase/auth";
 
 const RegisterForm = () => {
     const {
@@ -68,10 +69,10 @@ const RegisterForm = () => {
     };
 
     return (
-        <>
+        <section className=" bg-white border border-gray-200 rounded-xl p-6">
             <form
                 onSubmit={handleSubmit(handleRegisterForm)}
-                className="flex flex-col gap-5 w-120 bg-white border border-gray-200 rounded-xl p-6 "
+                className="flex flex-col gap-5 w-120 bg-white  "
             >
                 <div className="flex flex-col gap-1">
                     <label htmlFor="name" className="text-slate-700">
@@ -130,27 +131,31 @@ const RegisterForm = () => {
                     />
                     {errors.photo && <p className="text-red-500 text-sm mt-1">{errors.photo.message}</p>}
                 </div>
+
                 <div>
                     <button type="submit" className="btn btn-info text-white w-full">
                         Create Account
                     </button>
-                    <Divider />
-                    <button onClick={handleGoogleSignIn} className="btn w-full">
-                        <FcGoogle />
-                        Register with Google
-                    </button>
-                </div>
-                <div>
-                    <span>
-                        Already have account?
-                        <Link to="/auth/login" className="text-blue-600 ml-2 underline">
-                            Login
-                        </Link>
-                    </span>
                 </div>
             </form>
+
+            <div>
+                <Divider />
+                <button onClick={handleGoogleSignIn} className="btn w-full">
+                    <FcGoogle />
+                    Register with Google
+                </button>
+            </div>
+            <div className="mt-2">
+                <span>
+                    Already have account?
+                    <Link to="/auth/login" className="text-blue-600 ml-2 underline">
+                        Login
+                    </Link>
+                </span>
+            </div>
             <Toaster />
-        </>
+        </section>
     );
 };
 
