@@ -7,7 +7,7 @@ const Why = () => {
             {/* Hero Section */}
             <section className="px-6 py-16 md:py-24 lg:py-32 text-center">
                 <div className="max-w-5xl mx-auto">
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600 mb-6">
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-600 mb-6">
                         Unlock Your
                         <br />
                         Creative Potential

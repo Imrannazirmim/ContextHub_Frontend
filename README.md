@@ -1,80 +1,28 @@
-<!-- {myParticipatedContests.map(({ participant, contest }, index) => (
-                            <motion.tr
-                                key={contest._id}
-                                initial={{ opacity: 0, x: -50 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: index * 0.05 }}
-                                className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-all border-b border-gray-200 dark:border-gray-700"
-                            >
-                                <td className="py-6 px-6">
-                                    <div className="flex items-center gap-4">
-                                        <img
-                                            src={contest.image}
-                                            alt={contest.name}
-                                            className="w-16 h-16 rounded-lg object-cover shadow-md"
-                                        />
-                                        <div>
-                                            <p className="font-bold text-lg line-clamp-2">{contest.name}</p>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400 md:hidden">
-                                                Prize: ${contest.prize || contest.prizeMoney}
-                                            </p>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400 lg:hidden">
-                                                Fee: ${contest.entryFee || contest.price}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
+# ContestHub
 
-                                <td className="py-6 px-6">
-                                    <span className="badge badge-primary text-white px-4 py-2">
-                                        {contest.contestType}
-                                    </span>
-                                </td>
+**ContestHub** is a modern, full-stack contest platform where creators can host paid creative contests, participants can register via secure Stripe payments, submit their work, and compete for cash prizes. Built with React, Vite, Tailwind CSS, Firebase Authentication, MongoDB, Express, and Stripe.
 
-                                <td className="py-6 px-6 hidden md:table-cell">
-                                    <span className="text-2xl font-bold text-green-600">
-                                        ${contest.prize || contest.prizeMoney}
-                                    </span>
-                                </td>
+### Live Site URL
 
-                                <td className="py-6 px-6 hidden lg:table-cell">
-                                    <span className="font-semibold text-blue-600">
-                                        ${contest.entryFee || contest.price}
-                                    </span>
-                                </td>
+🔗 **https://contesthub.netlify.app**  
+(Replace with your actual Netlify URL once deployed)
 
-                                <td className="py-6 px-6">
-                                    <span
-                                        className={`font-medium ${
-                                            new Date(contest.deadline) < new Date() ? "text-red-600" : "text-orange-600"
-                                        }`}
-                                    >
-                                        {new Date(contest.deadline).toLocaleDateString()}
-                                    </span>
-                                </td>
+### Features
 
-                                <td className="py-6 px-6 hidden sm:table-cell">
-                                    <span
-                                        className={`badge ${
-                                            contest.status === "confirmed"
-                                                ? "badge-success"
-                                                : contest.status === "completed"
-                                                ? "badge-info"
-                                                : "badge-warning"
-                                        }`}
-                                    >
-                                        {contest.status.toUpperCase()}
-                                    </span>
-                                </td>
+-   **User Authentication** – Secure login/register with Firebase Authentication (email/password) and protected routes for logged-in users.
+-   **Browse & Search Contests** – View all confirmed contests with filtering by type, search by name/description, and pagination for smooth browsing.
+-   **Popular Contests Section** – Homepage highlights the top 5 contests with the highest participant count.
+-   **Contest Details Page** – Full contest information including prize money, deadline, task instructions, participant count, and registration status check.
+-   **Secure Payment Integration** – Seamless Stripe Checkout for contest registration fees with automatic participant count increment on successful payment.
+-   **Payment Success Handling** – Dedicated success page that confirms payment, registers the user as a participant, and auto-redirects.
+-   **Dashboard for Users** – Private dashboard with sections for My Participated Contests, My Winning Contests, Payment History, and User Profile.
+-   **Creator Dashboard** – Contest creators can create new contests, view/edit their pending contests, see submissions, and declare winners after the deadline.
+-   **Admin Panel** – Admins can manage users (change roles), approve/reject contests, view analytics (revenue, total users, contests, participants), and manage all contests.
+-   **Task Submission System** – Registered participants can submit (and update) their work for any contest they’ve paid for.
+-   **Winner Declaration** – Creators declare winners from submissions; winner stats are updated and displayed publicly.
+-   **Leaderboard** – Global ranking of users by number of wins, with search and pagination.
+-   **Responsive & Modern UI** – Built with Tailwind CSS + daisyUI for a clean, mobile-friendly, and beautiful interface.
+-   **Performance Optimized** – Code-splitting with React.lazy & Suspense, TanStack Query for efficient data fetching, and Vite for fast builds.
+-   **Private & Admin Routes** – Role-based access control using custom hooks (PrivateRoute, AdminRoute) for secure navigation.
 
-                                <td className="py-6 px-6 text-sm">
-                                    {new Date(participant.registeredAt).toLocaleDateString()}
-                                </td>
-
-                                <td className="py-6 px-6 text-center">
-                                    <Link to={`/contest/${contest._id}`} className="btn btn-primary btn-sm">
-                                        View Details
-                                    </Link>
-                                </td>
-                            </motion.tr>
-                        ))} -->
+ContestHub brings creativity, competition, and fair rewards together in one powerful platform! 🚀

@@ -4,14 +4,7 @@ import { FaMoneyBills } from "react-icons/fa6";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { useNavigate } from "react-router";
 
-const ContestTimeCount = ({
-    contest,
-    isRegistered,
-    deadlinePassed,
-    contestId,
-    onSubmitTask,
-    hasSubmitted = false,
-}) => {
+const ContestTimeCount = ({ contest, isRegistered, deadlinePassed, contestId, onSubmitTask, hasSubmitted = false }) => {
     const [timeRemaining, setTimeRemaining] = useState({
         days: 0,
         hours: 0,

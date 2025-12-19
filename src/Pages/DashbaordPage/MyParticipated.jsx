@@ -90,7 +90,7 @@ const MyParticipated = () => {
                                         alt={contest.name}
                                     />
                                 </td>
-                                <td>{contest.name}</td>
+                                <td>{contest.name.slice(0,15)}...</td>
                                 <td>{contest.contestType}</td>
                                 <td>${contest.prize}</td>
                                 <td>${contest.entryFee}</td>

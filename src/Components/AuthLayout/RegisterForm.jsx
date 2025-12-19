@@ -15,7 +15,7 @@ const RegisterForm = () => {
         formState: { errors },
         reset,
     } = useForm();
-    const { registerUser, updateUserProfile, signInWithGoogle, setError } = useAuth();
+    const { registerUser,  signInWithGoogle, setError } = useAuth();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -38,13 +38,14 @@ const RegisterForm = () => {
         const loadingToast = toast.loading("Creating your account...");
         try {
             const photoURL = data.photo && data.photo.length > 0 ? await uploadImage(data.photo[0]) : "";
-            await registerUser(data.email, data.password);
-            await updateUserProfile(data.name, photoURL);
+
+            await registerUser(data.email, data.password, data.name, photoURL);
+
             showToast("Account created successfully! Welcome aboard 🎉", "success", loadingToast);
             reset();
             navigate("/");
         } catch (err) {
-            showToast(err.message, "error", loadingToast);
+            showToast(err.message || "Registration failed", "error", loadingToast);
         } finally {
             setIsLoading(false);
         }

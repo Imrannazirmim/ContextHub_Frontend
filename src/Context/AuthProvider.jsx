@@ -54,6 +54,21 @@ const AuthProvider = ({ children }) => {
         throw new Error(message);
     };
 
+    const saveUserToBackend = async (firebaseUser) => {
+        const userInfo = {
+            name: firebaseUser.displayName || "User",
+            email: firebaseUser.email,
+            photoURL: firebaseUser.photoURL || "",
+        };
+
+        try {
+            await axios.post("https://contesthub-server-chi.vercel.app/users", userInfo);
+            console.log("User saved to backend:", userInfo.email);
+        } catch (err) {
+            console.error("Failed to save user to backend:", err.response?.data || err.message);
+        }
+    };
+
     const registerUser = async (email, password, name, photoURL) => {
         setLoading(true);
         setError(null);
@@ -66,8 +81,10 @@ const AuthProvider = ({ children }) => {
                     photoURL: photoURL || "",
                 });
             }
-
+            await userCredential.user.reload();
+            const updatedUser = auth.currentUser;
             setUser(auth.currentUser);
+            await saveUserToBackend(updatedUser);
             return userCredential;
         } catch (err) {
             handleAuthError(err);
@@ -139,20 +156,13 @@ const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
-            if (currentUser) {
-                const userInfo = {
-                    name: currentUser.displayName,
-                    email: currentUser.email,
-                    photoURL: currentUser.photoURL,
-                };
-                await axios.post("https://contesthub-server-chi.vercel.app/users", userInfo);
-            }
         });
         return () => unSubscribe();
     }, []);
+
     const authInfo = {
         user,
         loading,

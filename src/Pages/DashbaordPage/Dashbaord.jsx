@@ -1,21 +1,22 @@
 import { useState } from "react";
-import { Outlet, NavLink } from "react-router";
+import { Outlet, NavLink, useNavigate } from "react-router";
 import useUser from "../../Hooks/useUser";
 import { FiCheckSquare, FiFileText, FiList, FiMenu, FiPlus, FiUsers, FiX } from "react-icons/fi";
 import { AiFillTrophy } from "react-icons/ai";
 import { Suspense } from "react";
 import Loading from "../../Components/Utils/Loading";
-import { Link } from "lucide-react";
+import useAuth from "../../Hooks/useAuth";
 
 const Dashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const { userData, loading } = useUser();
-
+    const navigate = useNavigate();
+    const { user } = useAuth();
     if (loading) return <Loading />;
     if (!userData) return <div className="p-8 text-center">Unauthorized. Please log in.</div>;
 
-    const user = userData.user || userData;
-    const role = user.role || "user";
+    const userRole = userData.user || userData;
+    const role = userRole.role || "user";
 
     const isCreator = role === "creator" || role === "admin";
     const isAdmin = role === "admin";
@@ -58,6 +59,10 @@ const Dashboard = () => {
                 }`}
             >
                 <div className="flex flex-col h-full">
+                    <button onClick={() => navigate("/")} className="mt-5 btn mx-2">
+                        Go to home
+                    </button>
+
                     {/* Header */}
                     <div className="p-6 border-b border-gray-200 dark:border-gray-700">
                         <div className="flex items-center justify-between mb-4">
@@ -66,7 +71,6 @@ const Dashboard = () => {
                                 <FiX className="text-2xl text-gray-500" />
                             </button>
                         </div>
-                            <Link>Go to home</Link>
 
                         {/* User Profile */}
                         <div className="flex items-center gap-3">
@@ -76,7 +80,7 @@ const Dashboard = () => {
                                 className="w-10 h-10 rounded-full object-cover"
                             />
                             <div>
-                                <p className="font-medium truncate text-gray-500 max-w-[140px]">{user.name}</p>
+                                <p className="font-medium truncate text-gray-500 max-w-[140px]">{user.displayName}</p>
                                 <p className="text-xs text-gray-500 capitalize">{role}</p>
                             </div>
                         </div>

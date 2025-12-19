@@ -43,7 +43,7 @@ const MySubmission = () => {
 
     const declareWinnerMutation = useMutation({
         mutationFn: async ({ winnerEmail, winnerName, winnerPhoto }) => {
-            return axiosSecure.patch(`/contests/${contestId}/winner`, {
+            return axiosSecure.patch(`/contest/${contestId}/winner`, {
                 winnerEmail,
                 winnerName,
                 winnerPhoto: winnerPhoto || "",

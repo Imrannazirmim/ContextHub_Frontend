@@ -87,7 +87,7 @@ const CheckoutPayment = () => {
 
                 <div className="space-y-6">
                     {/* Contest Info Card */}
-                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                    <div className="bg-linear-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
                         <h3 className="text-2xl font-semibold text-gray-900 mb-4">{contest.name}</h3>
 
                         <div className="space-y-3 text-lg">

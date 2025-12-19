@@ -1,4 +1,3 @@
-// src/routes/AdminRoute.jsx
 import { Navigate } from "react-router";
 import Loading from "../Components/Utils/Loading";
 import useUser from "../Hooks/useUser";
