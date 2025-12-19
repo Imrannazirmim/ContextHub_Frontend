@@ -111,7 +111,7 @@ const MyParticipated = () => {
                                 <td className="py-6 px-6 text-sm">
                                     {new Date(participant.registeredAt).toLocaleDateString()}
                                 </td>
-                                <td className="py-6 px-6 text-center">
+                                <td className="py-6 px-6 text-center flex items-center">
                                     <Link to={`/contest/${contest._id}`} className="btn btn-primary btn-sm">
                                         View Details
                                     </Link>
