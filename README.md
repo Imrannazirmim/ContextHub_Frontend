@@ -4,7 +4,7 @@
 
 ### Live Site URL
 
-🔗 **https://contesthub.netlify.app**  
+🔗 **https://contest-hub25.netlify.app/**  
 (Replace with your actual Netlify URL once deployed)
 
 ### Features
