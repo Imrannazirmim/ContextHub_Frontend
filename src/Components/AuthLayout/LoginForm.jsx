@@ -8,9 +8,10 @@ import toast, { Toaster } from "react-hot-toast";
 
 const LoginForm = () => {
     const { signInUser, signInWithGoogle } = useAuth();
-    const { register, handleSubmit, clearErrors, reset } = useForm();
+    const { register, handleSubmit, clearErrors, reset, watch } = useForm();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const email = watch("email");
 
     //show toast
     const showToast = (message, type = "success", id = null) => {
@@ -38,14 +39,16 @@ const LoginForm = () => {
 
     const handleGoogleLogin = async () => {
         setIsLoading(true);
-        clearErrors()
-        const loadingToast = toast.loading("Login your google account...");
+        clearErrors();
+        const loadingToast = toast.loading("Logging in with Google...");
         try {
             await signInWithGoogle();
-            toast.success("google login successfull");
+            toast.success("Google login successful", { id: loadingToast });
             navigate("/");
         } catch (err) {
-            showToast(err.message, "error", loadingToast);
+            toast.error(err.message, { id: loadingToast });
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -75,9 +78,12 @@ const LoginForm = () => {
                 <div className="flex flex-col gap-1">
                     <label htmlFor="password" className="text-slate-700 flex justify-between">
                         Password
-                        <Link to="/auth/forget-password" className="text-blue-600 underline font-semibold text-sm">
+                        <button
+                            onClick={() => navigate(`/auth/forget-password`, { state: { email } })}
+                            className="text-blue-600 underline font-semibold text-sm"
+                        >
                             Forget Password
-                        </Link>
+                        </button>
                     </label>
                     <input
                         className="w-full py-2 px-6 bg-white border border-gray-200 rounded-xl"

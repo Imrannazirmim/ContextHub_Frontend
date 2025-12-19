@@ -19,7 +19,6 @@ const RegisterForm = () => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
-
     const showToast = (message, type = "success", id = null) => {
         if (type === "success") toast.success(message, { id, duration: 4000 });
         else toast.error(message, { id, duration: 4000 });
