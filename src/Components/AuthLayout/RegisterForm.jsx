@@ -48,7 +48,6 @@ const RegisterForm = () => {
         } finally {
             setIsLoading(false);
         }
-        console.log(data);
     };
 
     const handleGoogleSignIn = async (e) => {

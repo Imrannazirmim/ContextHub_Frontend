@@ -12,7 +12,6 @@ const MyWinning = () => {
         },
     });
 
-    console.log(data);
     
     const { winningContests = [] } = data;
 

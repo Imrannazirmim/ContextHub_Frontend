@@ -19,7 +19,6 @@ const Dashboard = () => {
     const isCreator = role === "creator" || role === "admin";
     const isAdmin = role === "admin";
 
-    console.log(user);
     
 
     const userLinks = [

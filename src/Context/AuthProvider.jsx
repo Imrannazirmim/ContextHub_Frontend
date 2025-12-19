@@ -148,7 +148,7 @@ const AuthProvider = ({ children }) => {
                     email: currentUser.email,
                     photoURL: currentUser.photoURL,
                 };
-                await axios.post("http://localhost:3000/users", userInfo);
+                await axios.post("https://contesthub-server-chi.vercel.app/users", userInfo);
             }
         });
         return () => unSubscribe();

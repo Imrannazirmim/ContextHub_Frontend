@@ -34,7 +34,7 @@ const LoginForm = () => {
         } finally {
             setIsLoading(false);
         }
-        console.log("form data", data);
+        "form data", data;
     };
 
     const handleGoogleLogin = async () => {

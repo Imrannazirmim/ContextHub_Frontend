@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "https://contesthub-server-chi.vercel.app",
 });
 const useAxiosSecure = () => {
     const { user, logOut } = useAuth();

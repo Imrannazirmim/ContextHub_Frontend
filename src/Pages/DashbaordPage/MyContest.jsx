@@ -29,7 +29,7 @@ const MyContest = () => {
         },
     });
 
-    console.log(contestData);
+    contestData;
 
     const handleDelete = async (id) => {
         const confirm = await Swal.fire({
