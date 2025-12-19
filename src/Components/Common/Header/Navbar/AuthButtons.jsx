@@ -10,13 +10,17 @@ const AuthButtons = ({ onClose }) => {
     const navigate = useNavigate();
     const { user, logout } = useAuth();
     const [showMenu, setShowMenu] = useState(false);
-    console.log(user);
 
     const handleNavigate = (path) => {
         navigate(path);
         if (onClose) onClose();
     };
-    
+
+    const handleLogout = async()=>{
+        await logout()
+
+    }
+
     return (
         <div className="relative inline-block">
             {user ? (
@@ -33,15 +37,13 @@ const AuthButtons = ({ onClose }) => {
                     </div>
                     {showMenu && (
                         <>
-                            <div className="menu w-60 absolute hidden lg:flex lg:flex-col gap-3 right-0 mt-2 bg-white shadow-lg rounded-lg border border-gray-200 z-50 p-3">
+                            <div className="menu w-60 absolute flex flex-col gap-3 right-0 mt-2 bg-white shadow-lg rounded-lg border border-gray-200 z-50 p-3">
                                 <div>
-                                    <h3 className="text-xl font-semibold text-slate-700">
-                                        {user.displayName}
-                                    </h3>
+                                    <h3 className="text-xl font-semibold text-slate-700">{user.displayName}</h3>
                                     <span className="text-sm text-slate-600">{user.email}</span>
                                 </div>
 
-                                 {/* Dashboard */}
+                                {/* Dashboard */}
                                 <div className="flex items-center gap-2 hover:text-blue-600">
                                     <LuLayoutDashboard size={20} />
                                     <Link to="/leaderboard" className="text-[1rem] text-slate-700">
@@ -65,12 +67,10 @@ const AuthButtons = ({ onClose }) => {
                                     </Link>
                                 </div>
 
-                
-
                                 {/* Sign Out */}
                                 <button
-                                    onClick={logout}
-                                    className="flex items-center gap-2 text-[1.1rem] text-red-600 hover:text-red-700 mt-2"
+                                    onClick={handleLogout}
+                                    className="flex cursor-pointer items-center gap-2 text-[1.1rem] text-red-600 hover:text-red-700 mt-2"
                                 >
                                     <BiLogOutCircle size={22} />
                                     Sign Out
@@ -81,16 +81,10 @@ const AuthButtons = ({ onClose }) => {
                 </>
             ) : (
                 <>
-                    <button
-                        onClick={() => handleNavigate("/auth/register")}
-                        className="btn btn-soft btn-info"
-                    >
+                    <button onClick={() => handleNavigate("/auth/register")} className="btn btn-soft btn-info">
                         Register
                     </button>
-                    <button
-                        onClick={() => handleNavigate("/auth/login")}
-                        className="btn btn-soft btn-success"
-                    >
+                    <button onClick={() => handleNavigate("/auth/login")} className="btn btn-soft btn-success">
                         Login
                     </button>
                 </>
