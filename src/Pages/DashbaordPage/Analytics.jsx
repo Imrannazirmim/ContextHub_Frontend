@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import {BarChart, Bar, Cell} from 'recharts'
-
+import { BarChart, Bar, Cell } from "recharts";
 
 const Analytics = () => {
     const axiosSecure = useAxiosSecure();
@@ -17,12 +16,7 @@ const Analytics = () => {
 
     const { stats = {}, recentContests = [] } = data;
 
-    const {
-        totalContests = 0,
-        totalUsers = 0,
-        totalRevenue = 0,
-        totalParticipants = 0,
-    } = stats;
+    const { totalContests = 0, totalUsers = 0, totalRevenue = 0, totalParticipants = 0 } = stats;
 
     const revenueTrendData = [
         { month: "Earlier", revenue: totalRevenue * 0.6 },
@@ -40,16 +34,13 @@ const Analytics = () => {
         value,
     }));
 
-    const topCategory = barData.length > 0
-        ? barData.reduce((prev, curr) => (prev.value > curr.value ? prev : curr))
-        : { name: "N/A", value: 0 };
+    const topCategory =
+        barData.length > 0
+            ? barData.reduce((prev, curr) => (prev.value > curr.value ? prev : curr))
+            : { name: "N/A", value: 0 };
 
     if (isLoading) {
-        return (
-            <div className="text-center py-20 text-xl text-gray-600">
-                Loading analytics...
-            </div>
-        );
+        return <div className="text-center py-20 text-xl text-gray-600">Loading analytics...</div>;
     }
 
     return (
@@ -57,12 +48,8 @@ const Analytics = () => {
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div>
-                    <h1 className="text-4xl font-bold text-gray-800 dark:text-white">
-                        Analytics Dashboard
-                    </h1>
-                    <p className="text-gray-600 dark:text-gray-400 mt-2">
-                        Platform-wide statistics for Admins.
-                    </p>
+                    <h1 className="text-4xl font-bold text-gray-800 dark:text-white">Analytics Dashboard</h1>
+                    <p className="text-gray-600 dark:text-gray-400 mt-2">Platform-wide statistics for Admins.</p>
                 </div>
                 <div className="flex items-center gap-4 mt-4 md:mt-0">
                     <select className="select select-bordered w-48">
@@ -107,8 +94,8 @@ const Analytics = () => {
                         <AreaChart data={revenueTrendData}>
                             <defs>
                                 <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.8}/>
-                                    <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
+                                    <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                                 </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -130,7 +117,8 @@ const Analytics = () => {
                     <div className="mb-4">
                         <h3 className="text-xl font-bold">Contests by Category</h3>
                         <p className="text-gray-600 dark:text-gray-400 text-sm">
-                            Top: <span className="font-semibold">{topCategory.name}</span> ({topCategory.value} contests)
+                            Top: <span className="font-semibold">{topCategory.name}</span> ({topCategory.value}{" "}
+                            contests)
                         </p>
                     </div>
                     <ResponsiveContainer width="100%" height={300}>
@@ -150,16 +138,16 @@ const Analytics = () => {
                     <h3 className="text-2xl font-bold">Recent Contests</h3>
                 </div>
                 <div className="overflow-x-auto">
-                    <table className="table w-full">
-                        <thead className="bg-gray-50 dark:bg-gray-700">
+                    <table className="table ">
+                        <thead>
                             <tr>
-                                <th className="text-left py-4 px-6">Contest Name</th>
-                                <th className="text-left py-4 px-6">Type</th>
-                                <th className="text-left py-4 px-6">Creator Email</th>
-                                <th className="text-left py-4 px-6">Participants</th>
-                                <th className="text-left py-4 px-6">Prize</th>
-                                <th className="text-left py-4 px-6">Status</th>
-                                <th className="text-left py-4 px-6">Deadline</th>
+                                <th>Contest Name</th>
+                                <th>Type</th>
+                                <th>Creator Email</th>
+                                <th>Participants</th>
+                                <th>Prize</th>
+                                <th>Status</th>
+                                <th>Deadline</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -172,14 +160,12 @@ const Analytics = () => {
                             ) : (
                                 recentContests.map((contest) => (
                                     <tr key={contest._id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                        <td className="py-4 px-6 font-medium max-w-xs truncate">
-                                            {contest.name}
-                                        </td>
-                                        <td className="py-4 px-6">{contest.contestType || "N/A"}</td>
-                                        <td className="py-4 px-6 text-sm">{contest.creatorEmail}</td>
-                                        <td className="py-4 px-6">{contest.participantsCount || 0}</td>
-                                        <td className="py-4 px-6">${contest.prize || 0}</td>
-                                        <td className="py-4 px-6">
+                                        <td className="py-4 px-6 font-medium max-w-xs truncate">{contest.name}</td>
+                                        <td>{contest.contestType || "N/A"}</td>
+                                        <td>{contest.creatorEmail}</td>
+                                        <td>{contest.participantsCount || 0}</td>
+                                        <td>${contest.prize || 0}</td>
+                                        <td>
                                             <span
                                                 className={`badge ${
                                                     contest.status === "completed"
@@ -192,9 +178,7 @@ const Analytics = () => {
                                                 {contest.status || "unknown"}
                                             </span>
                                         </td>
-                                        <td className="py-4 px-6">
-                                            {new Date(contest.deadline).toLocaleDateString()}
-                                        </td>
+                                        <td >{new Date(contest.deadline).toLocaleDateString()}</td>
                                     </tr>
                                 ))
                             )}
