@@ -67,17 +67,14 @@ const RegisterForm = () => {
     };
 
     return (
-        <section className=" bg-white border border-gray-200 rounded-xl p-6">
-            <form
-                onSubmit={handleSubmit(handleRegisterForm)}
-                className="flex flex-col gap-5 w-120 bg-white  "
-            >
+        <section className="  border border-gray-200 rounded-xl p-6">
+            <form onSubmit={handleSubmit(handleRegisterForm)} className="flex flex-col gap-5 w-120  ">
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="name" className="text-slate-700">
+                    <label htmlFor="name" className="text-slate-500">
                         FullName
                     </label>
                     <input
-                        className="w-full py-2 px-6 bg-white border border-gray-200 rounded-xl"
+                        className="w-full py-2 px-6  border border-gray-200 rounded-xl"
                         type="text"
                         name="name"
                         id="name"
@@ -88,11 +85,11 @@ const RegisterForm = () => {
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="email" className="text-slate-700">
+                    <label htmlFor="email" className="text-slate-500">
                         Email
                     </label>
                     <input
-                        className="w-full py-2 px-6 border bg-white border-gray-200 rounded-xl"
+                        className="w-full py-2 px-6 border  border-gray-200 rounded-xl"
                         type="email"
                         name="email"
                         id="email"
@@ -102,11 +99,11 @@ const RegisterForm = () => {
                     {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="password" className="text-slate-700">
+                    <label htmlFor="password" className="text-slate-500">
                         Password
                     </label>
                     <input
-                        className="w-full py-2 px-6 bg-white border border-gray-200 rounded-xl"
+                        className="w-full py-2 px-6 border border-gray-200 rounded-xl"
                         type="password"
                         name="password"
                         id="password"
@@ -116,7 +113,7 @@ const RegisterForm = () => {
                     {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="photo" className="text-slate-700 font-medium">
+                    <label htmlFor="photo" className="text-slate-500 font-medium">
                         Choose Photo
                     </label>
                     <input
@@ -125,7 +122,7 @@ const RegisterForm = () => {
                         name="photo"
                         accept="image/jpeg,image/png,image/jpg,image/webp"
                         {...register("photo", validationRules.photo)}
-                        className="w-full cursor-pointer py-2 px-6 border border-gray-200 rounded-xl bg-white text-sm file:text-fuchsia-500 font-semibold file:mr-4"
+                        className="w-full cursor-pointer py-2 px-6 border border-gray-200 rounded-xl  text-sm file:text-fuchsia-500 font-semibold file:mr-4"
                     />
                     {errors.photo && <p className="text-red-500 text-sm mt-1">{errors.photo.message}</p>}
                 </div>

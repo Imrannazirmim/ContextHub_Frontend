@@ -11,14 +11,13 @@ const MainLayout = () => {
         <>
             <Navbar />
             <Suspense fallback={<Loading />}>
-                <main className="min-h-screen bg-slate-100">
+                <main className="min-h-screen bg-base-100 text-base-content">
                     <Outlet />
                 </main>
             </Suspense>
 
             <Footer />
 
-            {/* Global Toaster - visible everywhere */}
             <Toaster
                 position="top-center"
                 toastOptions={{

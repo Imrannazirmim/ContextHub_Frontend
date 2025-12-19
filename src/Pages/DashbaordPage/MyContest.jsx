@@ -99,7 +99,7 @@ const MyContest = () => {
     return (
         <section className="container mx-auto mt-10 flex flex-col gap-10">
             <div className="flex justify-between items-center">
-                <h2 className="text-3xl font-bold text-gray-800 dark:text-white">My Created Contests</h2>
+                <h2 className="text-3xl font-bold ">My Created Contests</h2>
                 <button
                     onClick={() => navigate("/dashboard/create-contest")}
                     className="btn btn-info text-white flex items-center gap-2 hover:scale-105 transition"
@@ -109,27 +109,27 @@ const MyContest = () => {
                 </button>
             </div>
 
-            <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg">
-                <table className="table w-full">
-                    <thead className="bg-gray-100 dark:bg-gray-700">
+            <div className="overflow-x-auto ">
+                <table className="table ">
+                    <thead>
                         <tr>
-                            <th className="text-left py-4 px-6">CONTEST NAME</th>
-                            <th className="text-left py-4 px-6">TYPE</th>
-                            <th className="text-left py-4 px-6">DEADLINE</th>
-                            <th className="text-left py-4 px-6">STATUS</th>
-                            <th className="text-left py-4 px-6">ACTIONS</th>
+                            <th>CONTEST NAME</th>
+                            <th>TYPE</th>
+                            <th>DEADLINE</th>
+                            <th>STATUS</th>
+                            <th>ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
                         {contestData.length === 0 ? (
                             <tr>
-                                <td colSpan="5" className="text-center py-12 text-gray-500 text-lg">
+                                <td colSpan="5" className="text-center py-12  text-lg">
                                     No contests created yet. Click "Create New Contest" to get started!
                                 </td>
                             </tr>
                         ) : (
                             contestData.map((contest) => (
-                                <tr key={contest._id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                                <tr key={contest._id} className="transition">
                                     <td className="py-4 px-6 font-medium">
                                         {contest.name.length > 25 ? `${contest.name.slice(0, 25)}...` : contest.name}
                                     </td>

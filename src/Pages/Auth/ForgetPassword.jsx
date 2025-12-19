@@ -28,7 +28,7 @@ const ForgetPassword = () => {
     };
 
     return (
-        <section className="w-120 mx-auto bg-white border border-gray-300 rounded-xl p-6">
+        <section className="w-120 mx-auto  border border-gray-300 rounded-xl p-6">
             <Toaster />
 
             <h2 className="text-2xl font-semibold text-center text-pink-600 mb-4">Forgot Password</h2>

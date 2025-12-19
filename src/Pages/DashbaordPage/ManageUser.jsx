@@ -40,9 +40,9 @@ const ManageUser = () => {
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold mb-6">Manage Users</h1>
 
-            <div className="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow">
+            <div className="overflow-x-auto rounded-lg shadow">
                 <table className="table w-full">
-                    <thead className="bg-gray-100 dark:bg-gray-700">
+                    <thead >
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
@@ -52,7 +52,7 @@ const ManageUser = () => {
                     </thead>
                     <tbody>
                         {users.map(user => (
-                            <tr key={user._id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                            <tr key={user._id} >
                                 <td className="flex items-center gap-3">
                                     <img src={user.photoURL || "https://i.pravatar.cc/40"} alt="" className="w-10 h-10 rounded-full" />
                                     <span>{user.name}</span>

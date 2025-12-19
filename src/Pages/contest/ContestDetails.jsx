@@ -96,7 +96,7 @@ const ContestDetails = () => {
 
                         <div>
                             <h1 className="text-3xl font-bold mb-2">{contest.name}</h1>
-                            <p className="text-gray-600">
+                            <p className="text-gray-500">
                                 A contest to find the most innovative and modern logo for a new tech startup.
                             </p>
                         </div>
@@ -104,7 +104,7 @@ const ContestDetails = () => {
                         <ContestTab contest={contest} />
 
                         {contest.status === "confirmed" && contest.winner && (
-                            <div className="bg-green-50 border border-green-200 rounded-xl p-5 flex items-center gap-4">
+                            <div className="b border border-green-200 rounded-xl p-5 flex items-center gap-4">
                                 <img
                                     src={contest.winner.photo || "/avatar.png"}
                                     alt={contest.winner.name}

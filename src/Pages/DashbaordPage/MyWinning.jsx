@@ -34,10 +34,10 @@ const MyWinning = () => {
 
     if (winningContests.length === 0) {
         return (
-            <div className="text-center py-32 bg-gray-100 dark:bg-gray-900 rounded-xl">
+            <div className="text-center py-32 rounded-xl">
                 <div className="text-8xl mb-6">🏆</div>
-                <p className="text-4xl font-bold text-gray-800 dark:text-white mb-4">No wins yet!</p>
-                <p className="text-xl text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+                <p className="text-4xl font-bold mb-4">No wins yet!</p>
+                <p className="text-xl  max-w-md mx-auto">
                     You've participated in contests—keep going! Declare winners in admin to see them here.
                 </p>
             </div>
@@ -46,14 +46,14 @@ const MyWinning = () => {
 
     return (
         <div className="container mx-auto px-4 py-12 max-w-7xl">
-            <h1 className="text-5xl font-bold text-center mb-16 text-gray-800 dark:text-white">
+            <h1 className="text-5xl font-bold text-center mb-16">
                 My Winning Contests 🏆
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {winningContests.map((contest) => (
                     <div
                         key={contest._id}
-                        className="relative bg-gradient-to-br from-yellow-400 to-orange-500 rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out"
+                        className="relative bg-linear-to-br from-yellow-400 to-orange-500 rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out"
                     >
                         <div className="absolute top-4 right-4 bg-white text-orange-600 px-5 py-2 rounded-full font-bold shadow-md">
                             WINNER
@@ -63,7 +63,7 @@ const MyWinning = () => {
                             alt={contest.name} 
                             className="w-full h-64 object-cover" 
                         />
-                        <div className="p-8 text-white">
+                        <div className="p-8">
                             <h3 className="text-2xl font-bold mb-3 truncate">{contest.name || "Untitled Contest"}</h3>
                             <p className="text-lg opacity-90 mb-6 capitalize">{contest.contestType || "General"}</p>
                             <div className="flex items-center justify-center gap-4">

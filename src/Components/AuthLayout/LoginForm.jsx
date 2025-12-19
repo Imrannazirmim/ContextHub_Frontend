@@ -54,19 +54,19 @@ const LoginForm = () => {
 
     const loader = <span className="loading loading-spinner loading-xs"></span>;
     return (
-        <section className="w-120 flex flex-col gap-4 bg-white border border-gray-200 rounded-xl p-6">
+        <section className="w-120 flex flex-col gap-4  border border-gray-200 rounded-xl p-6">
             <Toaster />
             <form onSubmit={handleSubmit(handleSignForm)} className="flex flex-col gap-5">
                 <div className="text-center flex flex-col gap-2">
                     <h3 className="text-2xl font-semibold text-pink-600">Welcome Back!</h3>
-                    <p className="text-sm text-slate-700">Sign in to your account to continue</p>
+                    <p className="text-sm text-slate-500">Sign in to your account to continue</p>
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="email" className="text-slate-700">
+                    <label htmlFor="email" className="text-slate-500">
                         Email
                     </label>
                     <input
-                        className="w-full py-2 px-6 border bg-white border-gray-200 rounded-xl"
+                        className="w-full py-2 px-6 border  border-gray-200 rounded-xl"
                         type="email"
                         name="email"
                         disabled={isLoading}
@@ -76,7 +76,7 @@ const LoginForm = () => {
                 </div>
 
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="password" className="text-slate-700 flex justify-between">
+                    <label htmlFor="password" className="text-slate-500 flex justify-between">
                         Password
                         <button
                             onClick={() => navigate(`/auth/forget-password`, { state: { email } })}
@@ -86,7 +86,7 @@ const LoginForm = () => {
                         </button>
                     </label>
                     <input
-                        className="w-full py-2 px-6 bg-white border border-gray-200 rounded-xl"
+                        className="w-full py-2 px-6  border border-gray-200 rounded-xl"
                         type="password"
                         name="password"
                         disabled={isLoading}
@@ -95,7 +95,7 @@ const LoginForm = () => {
                     />
                 </div>
                 <div className="mt-4">
-                    <button type="submit" className="btn btn-info text-white w-full">
+                    <button type="submit" className="btn btn-info  w-full">
                         {isLoading ? loader : "Login"}
                     </button>
                 </div>

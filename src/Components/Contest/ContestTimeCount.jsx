@@ -97,26 +97,26 @@ const ContestTimeCount = ({
 
             {/* Prize, Participants, Entry Fee */}
             <div className="space-y-4">
-                <div className="flex items-center gap-4 bg-blue-50 rounded-xl p-4">
+                <div className="flex items-center gap-4 shadow rounded-xl p-4">
                     <FaMoneyBills className="text-blue-600" size={28} />
                     <div>
-                        <p className="text-gray-600">Prize Money</p>
+                        <p className="text-gray-500">Prize Money</p>
                         <strong className="text-xl">${contest.prizeMoney || contest.prize}</strong>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-blue-50 rounded-xl p-4">
+                <div className="flex items-center gap-4 shadow rounded-xl p-4">
                     <MdPeople className="text-blue-600" size={28} />
                     <div>
-                        <p className="text-gray-600">Participants</p>
+                        <p className="text-gray-500">Participants</p>
                         <strong className="text-xl">{contest.participantsCount}</strong>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-blue-50 rounded-xl p-4">
+                <div className="flex items-center gap-4 shadow rounded-xl p-4">
                     <RiMoneyDollarCircleLine className="text-blue-600" size={28} />
                     <div>
-                        <p className="text-gray-600">Entry Fee</p>
+                        <p className="text-gray-500">Entry Fee</p>
                         <strong className="text-xl">${contest.entryFee || contest.price}</strong>
                     </div>
                 </div>
@@ -156,11 +156,11 @@ const ContestTimeCount = ({
 
             {/* Dates */}
             <div className="space-y-3">
-                <div className="bg-blue-50 rounded-xl p-4">
+                <div className=" shadow rounded-xl p-4">
                     <strong>Start Date</strong>
                     <p>{formatDate(contest.createdAt)}</p>
                 </div>
-                <div className="bg-blue-50 rounded-xl p-4">
+                <div className=" shadow rounded-xl p-4">
                     <strong>End Date</strong>
                     <p>{formatDate(contest.deadline)}</p>
                 </div>

@@ -51,7 +51,7 @@ const AuthButtons = ({ onClose }) => {
 
                                 {/* Dashboard */}
                                 <div className="flex items-center gap-2 hover:text-blue-600">
-                                    <LuLayoutDashboard size={20} />
+                                    <LuLayoutDashboard size={20} className="text-slate-900" />
                                     <Link to="/leaderboard" className="text-[1rem] text-slate-700">
                                         Leaderboard
                                     </Link>
@@ -59,7 +59,7 @@ const AuthButtons = ({ onClose }) => {
 
                                 {/* Dashboard */}
                                 <div className="flex items-center gap-2 hover:text-blue-600">
-                                    <LuLayoutDashboard size={20} />
+                                    <LuLayoutDashboard size={20} className="text-slate-900" />
                                     <Link to="/dashboard/create-contest" className="text-[1rem] text-slate-700">
                                         Dashboard
                                     </Link>
@@ -67,7 +67,7 @@ const AuthButtons = ({ onClose }) => {
 
                                 {/* Profile */}
                                 <div className="flex items-center gap-2 hover:text-blue-600">
-                                    <CgProfile size={20} />
+                                    <CgProfile size={20} className="text-slate-900" />
                                     <Link to="/user-profile" className="text-[1rem] text-slate-700">
                                         User Profile
                                     </Link>
@@ -78,7 +78,7 @@ const AuthButtons = ({ onClose }) => {
                                     onClick={handleLogout}
                                     className="flex cursor-pointer items-center gap-2 text-[1.1rem] text-red-600 hover:text-red-700 mt-2"
                                 >
-                                    <BiLogOutCircle size={22} />
+                                    <BiLogOutCircle size={22} className="text-slate-900" />
                                     Sign Out
                                 </button>
                             </div>
@@ -87,12 +87,14 @@ const AuthButtons = ({ onClose }) => {
                 </>
             ) : (
                 <>
-                    <button onClick={() => handleNavigate("/auth/register")} className="btn btn-soft btn-info">
-                        Register
-                    </button>
-                    <button onClick={() => handleNavigate("/auth/login")} className="btn btn-soft btn-success">
-                        Login
-                    </button>
+                    <div className="flex gap-5">
+                        <button onClick={() => handleNavigate("/auth/register")} className="btn btn-soft btn-info">
+                            Register
+                        </button>
+                        <button onClick={() => handleNavigate("/auth/login")} className="btn btn-soft btn-success">
+                            Login
+                        </button>
+                    </div>
                 </>
             )}
         </div>

@@ -7,7 +7,7 @@ import Loading from "../Utils/Loading";
 const AuthLayout = () => {
     return (
         <Suspense fallback={<Loading />}>
-            <main>
+            <main className="min-h-screen bg-base-100 text-base-content">
                 <Outlet />
             </main>
         </Suspense>

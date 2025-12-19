@@ -65,8 +65,8 @@ const AllContest = () => {
                         }}
                         className={`tab font-medium ${
                             activeTab === category
-                                ? "bg-white shadow-md text-primary"
-                                : "text-gray-600 hover:text-gray-900"
+                                ? "bg-gray-300 rounded-md text-primary"
+                                : "text-gray-500"
                         }`}
                     >
                         {category}
@@ -82,7 +82,7 @@ const AllContest = () => {
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
                     {contests.map((contest) => (
-                        <div key={contest._id} className="card bg-white shadow-lg hover:shadow-xl transition-shadow">
+                        <div key={contest._id} className="card  shadow hover:shadow-xl transition-shadow">
                             <figure className="h-48 overflow-hidden">
                                 <img
                                     src={contest.image}
@@ -96,19 +96,19 @@ const AllContest = () => {
                                 <h3 className="card-title text-lg font-bold line-clamp-1">{contest.name}</h3>
 
                                 {/* Description */}
-                                <p className="text-sm text-gray-600 line-clamp-3 mb-3">{contest.description}</p>
+                                <p className="text-sm text-gray-500 line-clamp-3 mb-3">{contest.description}</p>
 
                                 {/* Info */}
                                 <div className="space-y-2 mb-4">
-                                    <div className="flex items-center gap-2 text-sm text-gray-700">
+                                    <div className="flex items-center gap-2 text-sm text-gray-500">
                                         <FiUsers className="text-primary" />
                                         <span>{contest.participantsCount || 0} Participants</span>
                                     </div>
-                                    <div className="flex items-center gap-2 text-sm text-gray-700">
+                                    <div className="flex items-center gap-2 text-sm text-gray-500">
                                         <FiDollarSign className="text-primary" />
                                         <span>Prize: ${contest.prize}</span>
                                     </div>
-                                    <div className="flex items-center gap-2 text-sm text-gray-700">
+                                    <div className="flex items-center gap-2 text-sm text-gray-500">
                                         <FiCalendar className="text-primary" />
                                         <span>{formatDate(contest.deadline)}</span>
                                     </div>

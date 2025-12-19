@@ -57,13 +57,13 @@ const CreateContest = () => {
                 {/* Header */}
                 <div className="mb-10">
                     <h2 className="text-3xl font-bold">Create a New Contest</h2>
-                    <p className="text-slate-700 text-sm">
+                    <p className=" text-sm">
                         Fill out the details below to launch your next successful contest.
                     </p>
                 </div>
 
                 {/* Form Card */}
-                <form onSubmit={handleSubmit(handleContestForm)} className="bg-white p-6 rounded-xl shadow space-y-6">
+                <form onSubmit={handleSubmit(handleContestForm)} className=" p-6 rounded-xl shadow space-y-6">
                     {/* Contest Name */}
                     <div className="form-control flex flex-col gap-1">
                         <label className="label font-medium">Contest Name</label>

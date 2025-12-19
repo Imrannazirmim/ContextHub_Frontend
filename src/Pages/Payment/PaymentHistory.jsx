@@ -20,12 +20,12 @@ const PaymentHistory = () => {
     }
 
     return (
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className=" rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Billing & Payments</h2>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
-                    <thead className="bg-gray-100 text-gray-600 text-sm">
+                    <thead className="text-sm">
                         <tr>
                             <th>Date</th>
                             <th>Description</th>

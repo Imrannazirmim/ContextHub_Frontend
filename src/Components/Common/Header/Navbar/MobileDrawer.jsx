@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { Moon, Sun, X } from "lucide-react";
 import AuthButtons from "./AuthButtons";
 import NavLinks from "./NavLinks";
 import Logo from "./Logo";
@@ -17,7 +17,7 @@ const MobileDrawer = ({ isOpen, onClose }) => (
             {/* Drawer Header */}
             <div className="flex justify-between items-center p-4 border-b">
                 <span className="text-lg font-bold text-gray-900">
-                    <Logo/>
+                    <Logo />
                 </span>
                 <button onClick={onClose} className="text-gray-700 hover:text-gray-900 focus:outline-none">
                     <X size={24} />

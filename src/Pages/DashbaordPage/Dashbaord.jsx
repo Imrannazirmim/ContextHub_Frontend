@@ -13,13 +13,11 @@ const Dashboard = () => {
     if (loading) return <Loading />;
     if (!userData) return <div className="p-8 text-center">Unauthorized. Please log in.</div>;
 
-    const user = userData.user || userData; 
+    const user = userData.user || userData;
     const role = user.role || "user";
 
     const isCreator = role === "creator" || role === "admin";
     const isAdmin = role === "admin";
-
-    
 
     const userLinks = [
         { to: "my-participated", icon: FiList, label: "My Participated" },
@@ -48,7 +46,7 @@ const Dashboard = () => {
     const closeSidebar = () => setSidebarOpen(false);
 
     return (
-        <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="flex min-h-screen">
             {/* Mobile Overlay */}
             {sidebarOpen && <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={closeSidebar} />}
 
@@ -64,7 +62,7 @@ const Dashboard = () => {
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h2>
                             <button onClick={closeSidebar} className="lg:hidden">
-                                <FiX className="text-2xl" />
+                                <FiX className="text-2xl text-gray-500" />
                             </button>
                         </div>
 
@@ -76,7 +74,7 @@ const Dashboard = () => {
                                 className="w-10 h-10 rounded-full object-cover"
                             />
                             <div>
-                                <p className="font-medium truncate max-w-[140px]">{user.name}</p>
+                                <p className="font-medium truncate text-gray-500 max-w-[140px]">{user.name}</p>
                                 <p className="text-xs text-gray-500 capitalize">{role}</p>
                             </div>
                         </div>
@@ -143,7 +141,7 @@ const Dashboard = () => {
             {/* Main Content */}
             <div className="flex-1 flex flex-col">
                 {/* Mobile Header */}
-                <header className="lg:hidden bg-white dark:bg-gray-800 shadow-md p-4">
+                <header className="lg:hidden shadow-md p-4">
                     <button onClick={() => setSidebarOpen(true)}>
                         <FiMenu className="text-2xl" />
                     </button>

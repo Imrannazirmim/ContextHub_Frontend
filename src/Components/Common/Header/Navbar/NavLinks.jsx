@@ -14,7 +14,7 @@ const NavLinks = ({ onClick }) => {
                     key={link.href}
                     to={link.href}
                     onClick={onClick}
-                    className="text-gray-700 hover:text-gray-900 font-medium transition-colors"
+                    className="text-gray-500 font-medium transition-colors"
                 >
                     {link.label}
                 </NavLink>

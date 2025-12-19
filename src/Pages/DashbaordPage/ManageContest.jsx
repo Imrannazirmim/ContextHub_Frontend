@@ -84,16 +84,14 @@ const ManageContest = () => {
         <div className="container mx-auto px-4 py-8 max-w-7xl">
             {/* Header */}
             <div className="mb-10">
-                <h1 className="text-4xl font-bold text-gray-800 dark:text-white">Manage Contests</h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                    View, approve, reject, or delete all contests on the platform.
-                </p>
+                <h1 className="text-4xl font-bold ">Manage Contests</h1>
+                <p className=" mt-2">View, approve, reject, or delete all contests on the platform.</p>
             </div>
 
             {/* Search & Filter */}
             <div className="flex flex-col lg:flex-row gap-4 mb-8">
                 <div className="relative flex-1">
-                    <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
+                    <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2  text-xl" />
                     <input
                         type="text"
                         placeholder="Search by name or description..."
@@ -128,33 +126,30 @@ const ManageContest = () => {
             )}
 
             {/* Table */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+            <div className=" rounded-2xl shadow-xl overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="table w-full">
-                        <thead className="bg-gray-50 dark:bg-gray-700">
+                        <thead>
                             <tr>
-                                <th className="text-left py-4 px-6">Contest</th>
-                                <th className="text-left py-4 px-6">Creator</th>
-                                <th className="text-left py-4 px-6">Type</th>
-                                <th className="text-left py-4 px-6">Status</th>
-                                <th className="text-left py-4 px-6">Deadline</th>
-                                <th className="text-left py-4 px-6">Participants</th>
-                                <th className="text-left py-4 px-6">Actions</th>
+                                <th>Contest</th>
+                                <th>Creator</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Deadline</th>
+                                <th>Participants</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {contests.length === 0 ? (
                                 <tr>
-                                    <td colSpan="7" className="text-center py-16 text-gray-500 text-lg">
+                                    <td colSpan="7" className="text-center py-16 text-lg">
                                         No contests found.
                                     </td>
                                 </tr>
                             ) : (
                                 contests.map((contest) => (
-                                    <tr
-                                        key={contest._id}
-                                        className="border-b hover:bg-gray-50 dark:hover:bg-gray-700 transition"
-                                    >
+                                    <tr key={contest._id} className="border-b transition">
                                         <td className="py-5 px-6">
                                             <div className="flex items-center gap-4">
                                                 <img
@@ -163,12 +158,12 @@ const ManageContest = () => {
                                                     className="w-14 h-14 rounded-lg object-cover shadow"
                                                 />
                                                 <div>
-                                                    <h3 className="font-semibold text-gray-800 dark:text-white">
+                                                    <h3 className="font-semibold">
                                                         {contest.name?.length > 30
                                                             ? contest.name.slice(0, 30) + "..."
                                                             : contest.name}
                                                     </h3>
-                                                    <p className="text-sm text-gray-500">
+                                                    <p className="text-sm">
                                                         Prize: ${contest.prize || contest.prizeMoney || 0}
                                                     </p>
                                                 </div>
@@ -182,7 +177,7 @@ const ManageContest = () => {
                                                     alt={contest.creatorName}
                                                     className="w-9 h-9 rounded-full"
                                                 />
-                                                <span className="text-gray-700 dark:text-gray-300">
+                                                <span>
                                                     {contest.creatorName ||
                                                         contest.creatorEmail?.split("@")[0] ||
                                                         "Unknown"}
@@ -190,9 +185,7 @@ const ManageContest = () => {
                                             </div>
                                         </td>
 
-                                        <td className="py-5 px-6 text-gray-600 dark:text-gray-400">
-                                            {contest.contestType || "-"}
-                                        </td>
+                                        <td className="py-5 px-6 ">{contest.contestType || "-"}</td>
 
                                         <td className="py-5 px-6">
                                             <span
@@ -210,7 +203,7 @@ const ManageContest = () => {
                                             </span>
                                         </td>
 
-                                        <td className="py-5 px-6 text-gray-600 dark:text-gray-400">
+                                        <td className="py-5 px-6">
                                             {contest.deadline
                                                 ? new Date(contest.deadline).toLocaleDateString("en-US", {
                                                       month: "short",
@@ -222,7 +215,7 @@ const ManageContest = () => {
 
                                         <td className="py-5 px-6">
                                             <div className="flex items-center gap-2">
-                                                <FiUsers className="text-gray-500" />
+                                                <FiUsers />
                                                 <span className="font-bold text-lg">
                                                     {contest.participantsCount || 0}
                                                 </span>

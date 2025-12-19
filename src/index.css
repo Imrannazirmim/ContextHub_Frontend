@@ -1,11 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-@import "tailwindcss";
-@plugin "daisyui";
 
+@import "tailwindcss";
+
+@plugin "daisyui" {
+    themes: light --default, dark;
+    base: true;
+    styled: true;
+    utils: true;
+}
+
+@theme {
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-mont: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+}
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
-.active{
-  @apply text-pink-500
+
+@layer base {
+    body {
+        @apply font-sans bg-base-100 text-base-content min-h-screen;
+    }
+}
+
+.active {
+    @apply text-primary;
 }
