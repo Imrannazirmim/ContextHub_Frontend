@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
 import axios from "axios";
 import { validationRules } from "../Utils/validationRules.jsx";
-import { getAdditionalUserInfo } from "firebase/auth";
 
 const RegisterForm = () => {
     const {

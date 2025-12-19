@@ -23,9 +23,6 @@ const UserProfile = () => {
     } = useForm();
 
 
-    
-
-    /* ----------  DATA  ---------- */
     const { data: stats } = useQuery({
         queryKey: ["userStats"],
         queryFn: () => axiosSecure.get("/stats/user").then((r) => r.data),
@@ -34,10 +31,9 @@ const UserProfile = () => {
     const { data: userData } = useQuery({
         queryKey: ["userData", user?.email],
         enabled: !!user?.email,
-        queryFn: () => axiosSecure.get(`/users/${user.email}`).then((r) => r.data),
+        queryFn: () => axiosSecure.get(`/users/${user.email}`).then((r) => r.data.user),
     });
 
-    /* ----------  MUTATION  ---------- */
     const updateMutation = useMutation({
         mutationFn: async (formData) => {
             await updateUserProfile(formData.name, formData.photoURL);
@@ -65,16 +61,14 @@ const UserProfile = () => {
 
     const onSubmit = (data) => updateMutation.mutate(data);
 
-    /* ----------  CHART  ---------- */
     const chartData = [
         { name: "Wins", value: stats?.won || 0 },
         { name: "Losses", value: (stats?.participated || 0) - (stats?.won || 0) },
     ];
     const COLORS = ["#10b981", "#f43f5e"];
 
-    /* ----------  RENDER  ---------- */
     return (
-        <>
+        <main className="container mx-auto pt-10">
             <title>My Profile – ContestHub</title>
 
             {/* Page header */}
@@ -84,9 +78,8 @@ const UserProfile = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* -------------- LEFT: PROFILE CARD -------------- */}
                 <div className="lg:col-span-2">
-                    <div className="card bg-base-100 shadow-xl">
+                    <div className="card bg-base-100 ">
                         <div className="card-body">
                             <div className="flex items-start justify-between">
                                 <h2 className="card-title">Profile Information</h2>
@@ -192,10 +185,9 @@ const UserProfile = () => {
                     </div>
                 </div>
 
-                {/* -------------- RIGHT: STATS & CHART -------------- */}
                 <div className="space-y-6">
                     {/* Stats */}
-                    <div className="card bg-base-100 shadow-xl">
+                    <div className="card bg-base-100">
                         <div className="card-body">
                             <h2 className="card-title flex items-center gap-2">
                                 <FiTrendingUp /> Statistics
@@ -219,7 +211,7 @@ const UserProfile = () => {
 
                     {/* Pie */}
                     {(stats?.participated || 0) > 0 && (
-                        <div className="card bg-base-100 shadow-xl">
+                        <div className="card bg-base-100">
                             <div className="card-body">
                                 <h2 className="card-title flex items-center gap-2">
                                     <FaChartPie /> Win / Loss Ratio
@@ -247,7 +239,7 @@ const UserProfile = () => {
                     )}
                 </div>
             </div>
-        </>
+        </main>
     );
 };
 export default UserProfile;
