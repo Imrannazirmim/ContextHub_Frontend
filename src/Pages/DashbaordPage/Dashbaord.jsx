@@ -5,6 +5,7 @@ import { FiCheckSquare, FiFileText, FiList, FiMenu, FiPlus, FiUsers, FiX } from 
 import { AiFillTrophy } from "react-icons/ai";
 import { Suspense } from "react";
 import Loading from "../../Components/Utils/Loading";
+import { Link } from "lucide-react";
 
 const Dashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -65,6 +66,7 @@ const Dashboard = () => {
                                 <FiX className="text-2xl text-gray-500" />
                             </button>
                         </div>
+                            <Link>Go to home</Link>
 
                         {/* User Profile */}
                         <div className="flex items-center gap-3">

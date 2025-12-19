@@ -43,7 +43,7 @@ const Leaderboard = () => {
 
     const isFirstPage = currentPage === 1 && !debouncedSearch;
 
-    const { topThree} = useMemo(() => {
+    const { topThree } = useMemo(() => {
         if (!isFirstPage) return { topThree: [], rankings: leaderboard };
         const sorted = [...leaderboard];
         return {
@@ -73,16 +73,14 @@ const Leaderboard = () => {
         <div className="container mx-auto px-4 py-12 max-w-7xl">
             {/* Header */}
             <div className="text-center mb-16">
-                <h1 className="text-5xl font-bold text-gray-800 dark:text-white mb-4">Leaderboard</h1>
-                <p className="text-xl text-gray-600 dark:text-gray-400">See who's leading the pack in ContestHub.</p>
+                <h1 className="text-5xl font-bold mb-4">Leaderboard</h1>
+                <p className="text-xl  dark:text-gray-400">See who's leading the pack in ContestHub.</p>
             </div>
 
             {/* Top 3 Podium */}
             {isFirstPage && topThree.length > 0 && (
                 <section className="mb-20">
-                    <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
-                        Top Performers
-                    </h2>
+                    <h2 className="text-3xl font-bold text-center mb-12 ">Top Performers</h2>
                     <div className="flex flex-wrap justify-center gap-8">
                         {topThree.map((user, index) => (
                             <div
@@ -100,7 +98,7 @@ const Leaderboard = () => {
                                     />
                                 </div>
                                 <h3
-                                    className={`mt-6 text-2xl font-bold text-gray-800 dark:text-white ${
+                                    className={`mt-6 text-2xl font-bold ${
                                         index === 0 ? "text-yellow-600 mt-8 text-3xl" : ""
                                     }`}
                                 >
@@ -115,9 +113,7 @@ const Leaderboard = () => {
             {/* Search + Rankings */}
             <section>
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-10">
-                    <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
-                        {isFirstPage ? "All Rankings" : "Rankings"}
-                    </h2>
+                    <h2 className="text-3xl font-bold">{isFirstPage ? "All Rankings" : "Rankings"}</h2>
                     <div className="relative w-full lg:w-96">
                         <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
                         <input
@@ -133,7 +129,7 @@ const Leaderboard = () => {
                     </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
+                <div className=" rounded-2xl overflow-hidden border border-gray-200">
                     <div className="overflow-x-auto">
                         <table className="table">
                             <thead>
@@ -146,7 +142,7 @@ const Leaderboard = () => {
                             <tbody>
                                 {leaderboard.length === 0 ? (
                                     <tr>
-                                        <td colSpan={3} className="text-center py-20 text-gray-500 text-xl">
+                                        <td colSpan={3} className="text-center py-20 text-xl">
                                             {debouncedSearch
                                                 ? "No users found matching your search."
                                                 : "No winners yet. Be the first!"}
@@ -172,19 +168,13 @@ const Leaderboard = () => {
                                                         />
                                                     </div>
                                                     <div>
-                                                        <p className="text-xl font-bold text-gray-800 dark:text-white">
-                                                            {user.name}
-                                                        </p>
-                                                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                                                            {user.email}
-                                                        </p>
+                                                        <p className="text-xl font-bold">{user.name}</p>
+                                                        <p className="text-sm ">{user.email}</p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p className="text-3xl font-extrabold text-gray-800 dark:text-white">
-                                                    {user.wins}
-                                                </p>
+                                                <p className="text-3xl font-extrabold ">{user.wins}</p>
                                             </td>
                                         </tr>
                                     ))
